@@ -366,6 +366,14 @@ footer{text-align:center;padding:32px 20px;color:var(--mu);font-size:13px;
 </div>
 
 <script>
+function sendHeight(){
+  window.parent.postMessage({iframeHeight:document.body.scrollHeight},'*');
+}
+window.addEventListener('load',sendHeight);
+window.addEventListener('resize',sendHeight);
+setInterval(sendHeight,600);
+</script>
+<script>
 document.addEventListener('DOMContentLoaded',function(){
 (function(){
 'use strict';
