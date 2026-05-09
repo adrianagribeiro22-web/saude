@@ -1,1 +1,586 @@
-placeholder
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard de Saúde</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.dr{
+  --bg:#000000;--s1:#0a0e1a;--s2:#0f1525;--s3:#141c30;
+  --bd:#1e2d50;--tx:#e8edf8;--mu:#7a88b0;
+  --ac:#4f8ef7;--pk:#e066a8;--pu:#c084fc;--gn:#60a5fa;--bb:#60a5fa;
+  margin-top:-30px !important;
+  font-family:'Inter',sans-serif;font-size:16px;
+  background:var(--bg);color:var(--tx);min-height:100vh;
+  -webkit-text-size-adjust:100%;
+}
+.dh{background:linear-gradient(135deg,#1a2140,#0d1117 60%,#1a1030);
+  border-bottom:2px solid var(--ac);padding:22px 20px 16px;
+  position:sticky;top:0;z-index:200;box-shadow:0 4px 24px rgba(79,142,247,.15)}
+.dh h1{font-family:'Lora',serif;font-size:clamp(20px,5vw,28px);
+  background:linear-gradient(135deg,#60a5fa,#c084fc);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
+.dh-sub{color:var(--mu);font-size:14px;margin-top:6px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.dh-sub a{color:var(--ac);text-decoration:none;font-size:13px;font-weight:600;
+  border:1px solid var(--ac);border-radius:7px;padding:3px 12px;transition:all .2s}
+.dh-sub a:hover{background:var(--ac);color:#0d1117}
+.dn{display:flex;background:var(--s1);border-bottom:2px solid var(--bd);
+  position:sticky;top:0;z-index:199;overflow-x:auto;scrollbar-width:none}
+.dn::-webkit-scrollbar{display:none}
+.dt{padding:14px 16px;background:transparent;border:none;border-bottom:3px solid transparent;
+  color:var(--mu);font-size:15px;font-weight:500;cursor:pointer;white-space:nowrap;
+  transition:all .2s;font-family:'Inter',sans-serif;flex-shrink:0}
+.dt:hover{color:var(--tx);background:var(--s2)}
+.dt.on{color:var(--bb);border-bottom-color:var(--bb);background:var(--s2);font-weight:700}
+.ds{display:none;padding:20px;max-width:960px}
+.ds.on{display:block}
+.st{font-family:'Lora',serif;font-size:22px;color:var(--tx);margin-bottom:4px}
+.ss{color:var(--mu);font-size:14px;margin-bottom:22px;line-height:1.5}
+.card{background:var(--s1);border:1px solid var(--bd);border-radius:14px;
+  padding:20px;margin-bottom:18px;box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.ch{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.ct{font-weight:700;font-size:16px;color:var(--tx)}
+.cs{font-size:13px;color:var(--mu);margin-top:3px}
+.rp{font-size:12px;padding:4px 12px;border-radius:20px;background:var(--s3);
+  border:1px solid var(--bd);color:var(--mu);white-space:nowrap}
+.ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:12px;margin-bottom:24px}
+.ac{background:var(--s2);border:1px solid var(--bd);border-left:4px solid var(--pk);
+  border-radius:12px;padding:14px;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.ac.ok{border-left-color:var(--gn)}
+.ac .an{font-size:12px;color:var(--mu);margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+.ac .av{font-family:'Lora',serif;font-size:24px;line-height:1;color:var(--pk)}
+.ac.ok .av{color:var(--gn)}
+.ac .ar{font-size:12px;color:var(--mu);margin-top:4px;line-height:1.5}
+.ac .ad{font-size:11px;color:var(--mu);margin-top:3px}
+.bdg{display:inline-block;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700;margin-top:5px}
+.bdg-a{background:rgba(224,102,168,.2);color:var(--pk)}
+.bdg-o{background:rgba(74,222,128,.15);color:var(--gn)}
+.pcr{background:linear-gradient(135deg,#1d1030,#1a1a2e);border:2px solid var(--pk);
+  border-radius:14px;padding:20px;margin-bottom:20px;box-shadow:0 4px 24px rgba(224,102,168,.2)}
+.pcrt{font-family:'Lora',serif;font-size:18px;color:var(--pk);margin-bottom:10px}
+.pcrx{font-size:14px;color:var(--mu);line-height:1.6}
+.pcrp{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.pp{padding:6px 14px;border-radius:20px;background:rgba(224,102,168,.2);
+  border:1px solid var(--pk);color:var(--pk);font-size:13px;font-weight:700}
+.cw{position:relative;height:220px}
+.dr-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.di{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--mu)}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.mg{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.mb{padding:7px 14px;border-radius:20px;border:1px solid var(--bd);background:var(--s2);
+  color:var(--mu);font-size:13px;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+.mb:hover{border-color:var(--ac);color:var(--tx)}
+.mb.on{background:var(--ac);border-color:var(--ac);color:#0d1117;font-weight:700}
+.mb.ma{border-color:rgba(224,102,168,.5)}
+.mb.ma.on{background:var(--pk);border-color:var(--pk)}
+.sl{font-size:12px;color:var(--mu);text-transform:uppercase;letter-spacing:.6px;
+  font-weight:600;margin:20px 0 10px}
+.tb{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
+.tb th{background:var(--s3);padding:10px 14px;text-align:left;font-size:12px;
+  color:var(--mu);text-transform:uppercase;letter-spacing:.4px;font-weight:600}
+.tb th:first-child{border-radius:10px 0 0 0}
+.tb th:last-child{border-radius:0 10px 0 0}
+.tb td{padding:12px 14px;border-bottom:1px solid var(--bd);vertical-align:top;line-height:1.5}
+.tb tr:last-child td{border-bottom:none}
+.tb tr:hover td{background:var(--s3)}
+.tg{display:inline-block;padding:3px 10px;border-radius:8px;font-size:12px;font-weight:600}
+.to{background:rgba(74,222,128,.15);color:var(--gn)}
+.ta{background:rgba(224,102,168,.15);color:var(--pk)}
+.tn{background:var(--s3);color:var(--mu)}
+.tp{background:rgba(192,132,252,.15);color:var(--pu)}
+.dg{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:14px}
+.dc{background:var(--s3);border:1px solid var(--bd);border-radius:10px;padding:14px;text-align:center}
+.dc .dl{font-size:11px;color:var(--mu);margin-bottom:5px;line-height:1.3}
+.dc .dv{font-family:'Lora',serif;font-size:22px;line-height:1}
+.dc .ds{font-size:11px;color:var(--mu);margin-top:3px}
+.eb{display:grid;gap:14px}
+.ei{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.6;color:var(--mu)}
+.ei strong{color:var(--tx)}
+.ed{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:7px}
+.hc{background:linear-gradient(135deg,#1a2140,#1a1030);border:1px solid var(--bd);
+  border-radius:14px;padding:28px;margin-bottom:18px}
+.hc h2{font-family:'Lora',serif;font-size:20px;background:linear-gradient(135deg,#60a5fa,#c084fc);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
+.hc p{color:var(--mu);font-size:14px;line-height:1.7;margin-bottom:10px}
+.cr{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.cb{padding:10px 20px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;
+  border:none;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.ce{background:rgba(79,142,247,.2);border:1px solid var(--ac);color:var(--ac)}
+.cw2{background:rgba(74,222,128,.15);border:1px solid var(--gn);color:var(--gn)}
+.ce:hover{background:var(--ac);color:#0d1117}
+.cw2:hover{background:var(--gn);color:#0d1117}
+.sr{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:16px}
+.sc{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:14px;text-align:center}
+.sn{font-family:'Lora',serif;font-size:28px;color:var(--ac);line-height:1}
+.sk{font-size:12px;color:var(--mu);margin-top:4px}
+.warn-box{background:rgba(224,102,168,.08);border:1px solid rgba(224,102,168,.3);
+  border-radius:8px;padding:10px 14px;margin-top:14px;font-size:13px;color:var(--pk)}
+footer{text-align:center;padding:32px 20px;color:var(--mu);font-size:13px;
+  border-top:1px solid var(--bd);margin-top:10px}
+@media(max-width:600px){
+  .ds{padding:14px}
+  .cw{height:185px}
+  .ag{grid-template-columns:repeat(2,1fr)}
+  .dg{grid-template-columns:repeat(2,1fr)}
+  .dt{padding:12px 13px;font-size:14px}
+}
+
+.tab-radio { display: none !important; }
+.ds { display: none !important; }
+#r-home:checked ~ .dn ~ .ds-home { display: block !important; }
+#r-al:checked ~ .dn ~ .ds-al { display: block !important; }
+#r-sg:checked ~ .dn ~ .ds-sg { display: block !important; }
+#r-de:checked ~ .dn ~ .ds-de { display: block !important; }
+#r-ne:checked ~ .dn ~ .ds-ne { display: block !important; }
+#r-of:checked ~ .dn ~ .ds-of { display: block !important; }
+#r-home:checked ~ .dn label[for="r-home"],
+#r-al:checked ~ .dn label[for="r-al"],
+#r-sg:checked ~ .dn label[for="r-sg"],
+#r-de:checked ~ .dn label[for="r-de"],
+#r-ne:checked ~ .dn label[for="r-ne"],
+#r-of:checked ~ .dn label[for="r-of"] {
+  color: var(--bb) !important;
+  border-bottom: 3px solid var(--bb) !important;
+  background: var(--s2) !important;
+  font-weight: 700 !important;
+}
+</style>
+</head>
+<body>
+<div class="dr">
+<div class="dh" style="position:relative;top:auto">
+  <h1>💙 Dashboard de Saúde</h1>
+  <div class="dh-sub">
+    <span>Última atualização: <strong style="color:var(--bb)">07/05/2026</strong></span>
+    <a href="https://docs.google.com/spreadsheets/d/1jlMoJ_J3Shn0Tq-Kr0y3cvGZJgFYmga0/edit?usp=drivesdk&ouid=104893621434881397376&rtpof=true&sd=true" target="_blank">📊 Planilha Completa</a>
+  </div>
+</div>
+
+<input type="radio" name="tab" id="r-home" class="tab-radio" checked>
+<input type="radio" name="tab" id="r-al" class="tab-radio">
+<input type="radio" name="tab" id="r-sg" class="tab-radio">
+<input type="radio" name="tab" id="r-de" class="tab-radio">
+<input type="radio" name="tab" id="r-ne" class="tab-radio">
+<input type="radio" name="tab" id="r-of" class="tab-radio">
+<div class="dn">
+  <label class="dt" for="r-home">🏠 Início</label>
+  <label class="dt" for="r-al">⚠️ Alertas</label>
+  <label class="dt" for="r-sg">🩸 Sangue</label>
+  <label class="dt" for="r-de">🦴 Densitometria</label>
+  <label class="dt" for="r-ne">🧠 Neurológico</label>
+  <label class="dt" for="r-of">👁️ Oftalmológico</label>
+</div>
+
+<!-- HOME -->
+<div id="home" class="ds ds-home">
+  <div class="hc">
+    <h2>Sobre este dashboard</h2>
+    <p>Este painel foi criado para acompanhar a evolução da minha saúde ao longo do tempo. Aqui estão registrados exames de sangue, avaliações neurológicas, oftalmológicas, densitometria óssea e outros dados clínicos desde 2021.</p>
+    <p>O objetivo é ter uma visão clara e organizada dos resultados, facilitando o acompanhamento médico e identificando tendências com mais facilidade.</p>
+    <p>A planilha completa com todos os detalhes, laudos e histórico de consultas está disponível no link acima.<br>
+    <span style="font-size:13px;color:var(--mu)">⚠️ O arquivo está no Google Drive com permissão de visualização para todos. Se receber aviso de acesso negado, tente abrir em outro navegador ou trocar de conta Google.</span></p>
+    <div class="sr">
+      <div class="sc"><div class="sn">46</div><div class="sk">Exames registrados</div></div>
+      <div class="sc"><div class="sn">18</div><div class="sk">Coletas de sangue</div></div>
+      <div class="sc"><div class="sn">4+</div><div class="sk">Anos de histórico</div></div>
+      <div class="sc"><div class="sn">8</div><div class="sk">Especialidades</div></div>
+    </div>
+  </div>
+  <div class="hc">
+    <h2>Tem alguma ideia de como melhorar?</h2>
+    <p>Se você é profissional de saúde ou tem sugestões de como tornar este painel mais útil, adoraria ouvir!</p>
+    <div class="cr">
+      <a href="mailto:adrianagribeiro22@gmail.com" class="cb ce">✉️ adrianagribeiro22@gmail.com</a>
+      <a href="https://wa.me/5521998476690" class="cb cw2" target="_blank" title="WhatsApp" style="display:inline-flex;align-items:center;gap:8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- ALERTAS -->
+<div id="al" class="ds ds-al">
+  <p class="st">Alertas e Destaques</p>
+  <p class="ss">Itens fora do limite de referência no último exame disponível</p>
+  <div class="pcr">
+    <div class="pcrt">⚠️ PCR — Inflamação Crônica Persistente</div>
+    <p class="pcrx">A Proteína C-Reativa esteve elevada nas <strong style="color:var(--pk)">3 vezes que foi medida</strong>, nunca normalizando. O valor de referência é abaixo de 0,5 mg/dL. Isso indica um processo inflamatório ativo contínuo, consistente com o quadro neurológico. <strong style="color:var(--tx)">Vale discutir explicitamente com a médica.</strong></p>
+    <div class="pcrp">
+      <span style="font-size:13px;color:var(--mu);width:100%;display:block;margin-bottom:4px">Histórico PCR:</span>
+      <span class="pp">mar/2023: 3,7</span>
+      <span class="pp">abr/2025: 2,0</span>
+      <span class="pp">nov/2025: 2,88</span>
+    </div>
+  </div>
+  <p class="sl">Fora do limite no último exame</p>
+  <div class="ag" id="alertGrid"></div>
+  <p class="sl" style="margin-top:28px">Melhorou — estava alterado antes, normal agora</p>
+  <div class="ag" id="improvedGrid"></div>
+</div>
+
+<!-- SANGUE -->
+<div id="sg" class="ds ds-sg">
+  <p class="st">Exames de Sangue</p>
+  <p class="ss">Toque em um marcador para ver a evolução ao longo do tempo</p>
+  <div class="mg" id="markerGrid"></div>
+  <div class="card">
+    <div class="ch">
+      <div><div class="ct" id="cT">—</div><div class="cs" id="cS"></div></div>
+      <span class="rp" id="cR"></span>
+    </div>
+    <div class="cw"><canvas id="mainChart"></canvas></div>
+    <div class="dr-row" id="dotsRow"></div>
+  </div>
+</div>
+
+<!-- DENSITOMETRIA -->
+<div id="de" class="ds ds-de">
+  <p class="st">Densitometria Óssea</p>
+  <p class="ss">T-score: Normal ≥ −1,0 · Osteopenia −1,0 a −2,5 · Osteoporose ≤ −2,5</p>
+  <div class="card">
+    <div class="ch"><div><div class="ct">T-score da Coluna L1–L4</div><div class="cs">Comparativo entre os dois exames</div></div></div>
+    <div class="cw"><canvas id="densitChart"></canvas></div>
+  </div>
+  <div style="display:grid;gap:14px">
+    <div class="card" style="margin:0">
+      <div class="ch"><div><div class="ct">04/01/2022 — Guaratiba</div><div class="cs">DXA método padrão</div></div><span class="tg to">Normalidade</span></div>
+      <div class="dg">
+        <div class="dc"><div class="dl">Coluna L1–L4</div><div class="dv" style="color:var(--gn)">+0,5</div><div class="ds">T-score</div></div>
+        <div class="dc"><div class="dl">DMO Coluna</div><div class="dv">1,245</div><div class="ds">g/cm²</div></div>
+        <div class="dc"><div class="dl">Colo do Fêmur</div><div class="dv" style="color:var(--gn)">+0,4</div><div class="ds">T-score</div></div>
+        <div class="dc"><div class="dl">Fêmur Total</div><div class="dv" style="color:var(--gn)">+0,5</div><div class="ds">T-score</div></div>
+      </div>
+    </div>
+    <div class="card" style="margin:0">
+      <div class="ch"><div><div class="ct">20/03/2025 — Rede Sarah</div><div class="cs">DXA com TBS</div></div><span class="tg tp">Osteopenia</span></div>
+      <div class="dg">
+        <div class="dc"><div class="dl">Coluna L1–L4</div><div class="dv" style="color:var(--pu)">−0,9</div><div class="ds">T-score</div></div>
+        <div class="dc"><div class="dl">TBS</div><div class="dv" style="color:var(--gn)">1,386</div><div class="ds">&gt;1,230 ok</div></div>
+        <div class="dc"><div class="dl">TBS T-score</div><div class="dv" style="color:var(--pu)">−0,9</div><div class="ds">T-score</div></div>
+        <div class="dc"><div class="dl">Fêmur/Colo</div><div class="dv" style="color:var(--pu);font-size:15px">Osteopenia</div><div class="ds">ver laudo</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <div class="ct" style="margin-bottom:14px">O que esses resultados significam</div>
+    <div class="eb">
+      <div class="ei"><div class="ed" style="background:var(--gn)"></div><div><strong>2022 — Normalidade:</strong> A densidade óssea estava dentro do esperado para a idade em todos os sítios avaliados.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--pu)"></div><div><strong>2025 — Osteopenia na coluna:</strong> Houve redução da densidade óssea. Osteopenia significa que o osso está mais fraco que o normal, mas ainda não é osteoporose — é o estágio anterior.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--gn)"></div><div><strong>TBS 1,386 — Arquitetura preservada:</strong> O TBS avalia a microarquitetura interna do osso. Acima de 1,230 indica que a estrutura óssea está preservada apesar da redução de densidade.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--pk)"></div><div><strong>Atenção:</strong> A passagem de normalidade para osteopenia em 3 anos merece acompanhamento. Corticoterapia prolongada e vitamina D baixa podem contribuir para essa redução.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- NEUROLÓGICO -->
+<div id="ne" class="ds ds-ne">
+  <p class="st">Avaliação Neurológica</p>
+  <p class="ss">Eletroneuromiografia (ENMG) e Potenciais Evocados — 2023 × 2024</p>
+  <div class="card">
+    <div style="overflow-x:auto">
+      <table class="tb">
+        <thead><tr><th>Parâmetro</th><th>03/04/2023 — Super CCS</th><th>12/07/2024 — Sarah</th></tr></thead>
+        <tbody>
+          <tr><td style="font-weight:600">Conclusão</td>
+            <td style="font-size:13px;color:var(--mu)">Polineuropatia sensitivo-motora axonal simétrica nos 4 membros + possível miopatia crônica proximal MMSS</td>
+            <td style="font-size:13px;color:var(--mu)">Sequela de polirradiculoneuropatia axonal (MMSS); PE Motor normal; PE Somato alterado</td></tr>
+          <tr><td style="font-weight:600">Condução MMSS</td><td><span class="tg ta">Alterada</span></td><td><span class="tg ta">Alterada</span></td></tr>
+          <tr><td style="font-weight:600">Condução MMII</td><td><span class="tg ta">Alterada</span></td><td><span class="tg tn">Não avaliado</span></td></tr>
+          <tr><td style="font-weight:600">Miografia (Agulha)</td><td><span class="tg ta">Neuropatia distal sem reinervação</span></td><td><span class="tg ta">Sinais desnervatórios ativos</span></td></tr>
+          <tr><td style="font-weight:600">PE Motor</td><td><span class="tg tn">Não realizado</span></td><td><span class="tg to">Normal</span></td></tr>
+          <tr><td style="font-weight:600">PE Visual</td><td><span class="tg tn">Não realizado</span></td><td><span class="tg to">Normal *</span></td></tr>
+          <tr><td style="font-weight:600">PE Somatossensitivo</td><td><span class="tg tn">Não realizado</span></td><td><span class="tg ta">Alterado</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--mu);margin-top:12px">* PE Visual normal com ressalva técnica: estimulação por padrão reverso prejudicada; flash monocular normal bilateralmente.</p>
+  </div>
+  <div class="card">
+    <div class="ct" style="margin-bottom:14px">O que esses resultados significam</div>
+    <div class="eb">
+      <div class="ei"><div class="ed" style="background:var(--pk)"></div><div><strong>Dano axonal periférico nos 4 membros:</strong> Os nervos fora do cérebro e da medula estão comprometidos de forma simétrica, afetando sensibilidade e motricidade.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--gn)"></div><div><strong>PE Motor normal em 2024:</strong> Boa notícia — a via motora dentro do SNC (cérebro e medula) está íntegra. O problema está nos nervos periféricos, não no sistema nervoso central.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--pu)"></div><div><strong>Sinais desnervatórios ativos em 2024:</strong> Fibrilações detectadas indicam que o processo ainda estava acontecendo — não apenas uma lesão antiga estabilizada.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--pk)"></div><div><strong>PE Somatossensitivo alterado:</strong> Confirma comprometimento das vias sensitivas periféricas, consistente com a polineuropatia diagnosticada.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- OFTALMOLÓGICO -->
+<div id="of" class="ds ds-of">
+  <p class="st">Avaliação Oftalmológica</p>
+  <p class="ss">Campo visual, OCT de nervo óptico e acompanhamento da retina</p>
+  <div class="card">
+    <div class="ch"><div><div class="ct">Campo Visual — MD (Mean Deviation)</div><div class="cs">Mais negativo = pior · Normal: próximo de 0 dB</div></div></div>
+    <div class="cw"><canvas id="cvChart"></canvas></div>
+    <div class="warn-box">⚠️ Piora significativa: OD de −0,15 → −3,5 dB &nbsp;·&nbsp; OE de −0,62 → −5,5 dB (2022 → 2026)</div>
+  </div>
+  <div style="display:grid;gap:14px">
+    <div class="card" style="margin:0">
+      <div class="ch"><div class="ct">03/10/2022 — Campo Visual</div><span class="tg to">Normal</span></div>
+      <div class="dg" style="grid-template-columns:repeat(2,1fr)">
+        <div class="dc"><div class="dl">OD — MD</div><div class="dv" style="color:var(--gn)">−0,15 dB</div><div class="ds">Normal</div></div>
+        <div class="dc"><div class="dl">OE — MD</div><div class="dv" style="color:var(--gn)">−0,62 dB</div><div class="ds">Normal geral</div></div>
+        <div></div>
+        <div class="dc"><div class="dl">OE — STF</div><div class="dv" style="color:var(--pu);font-size:18px">2,22 dB</div><div class="ds">p&lt;10% alterado</div></div>
+      </div>
+    </div>
+    <div class="card" style="margin:0">
+      <div class="ch"><div class="ct">13/02/2025 — Mapeamento de Retina</div><span class="tg to">Normal</span></div>
+      <p style="font-size:14px;color:var(--mu);line-height:1.6">Vítreo claro, retinas aplicadas, discos ópticos nítidos com escavações 0,4×0,4 e regra ISNT preservada. Arcadas vasculares e máculas sem alterações. Brilho foveal preservado. Periferia sem alterações.</p>
+    </div>
+    <div class="card" style="margin:0">
+      <div class="ch"><div class="ct">05/01/2026 — Paquimetria, Campo Visual e OCT</div><span class="tg ta">Alterado</span></div>
+      <div class="dg">
+        <div class="dc"><div class="dl">Paquimetria OD</div><div class="dv">527 µm</div><div class="ds">Normal</div></div>
+        <div class="dc"><div class="dl">Paquimetria OE</div><div class="dv">533 µm</div><div class="ds">Normal</div></div>
+        <div class="dc"><div class="dl">Campo Visual OD</div><div class="dv" style="color:var(--pk)">−3,5 dB</div><div class="ds">p&lt;10% alterado</div></div>
+        <div class="dc"><div class="dl">Campo Visual OE</div><div class="dv" style="color:var(--pk)">−5,5 dB</div><div class="ds">p&lt;5% alterado</div></div>
+        <div class="dc"><div class="dl">RNFL OD</div><div class="dv" style="color:var(--pu)">75 µm</div><div class="ds">limite inferior</div></div>
+        <div class="dc"><div class="dl">RNFL OE</div><div class="dv" style="color:var(--pu)">79 µm</div><div class="ds">limite inferior</div></div>
+      </div>
+    </div>
+    <div class="card" style="margin:0">
+      <div class="ch"><div class="ct">07/04/2026 — OCT de Mácula</div><span class="tg to">Normal</span></div>
+      <div class="dg">
+        <div class="dc"><div class="dl">Fóvea OD</div><div class="dv">244 µm</div><div class="ds">Normal</div></div>
+        <div class="dc"><div class="dl">Fóvea OE</div><div class="dv">245 µm</div><div class="ds">Normal</div></div>
+        <div class="dc"><div class="dl">GCC OD</div><div class="dv">66 µm</div><div class="ds">monitorar</div></div>
+        <div class="dc"><div class="dl">GCC OE</div><div class="dv">63 µm</div><div class="ds">monitorar</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <div class="ct" style="margin-bottom:14px">O que esses resultados significam</div>
+    <div class="eb">
+      <div class="ei"><div class="ed" style="background:var(--pk)"></div><div><strong>Piora do campo visual 2022→2026:</strong> O campo visual mede a área que você enxerga sem mover os olhos. O MD ficou mais negativo nos dois olhos, indicando perda de visão periférica, mais intensa no olho esquerdo.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--pu)"></div><div><strong>RNFL nos limites inferiores (75 e 79 µm):</strong> A RNFL é a camada de fibras nervosas da retina — extensão direta do nervo óptico. Valores abaixo de 80 µm merecem acompanhamento por risco de progressão.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--gn)"></div><div><strong>Mácula normal em 2026:</strong> A mácula, responsável pela visão central e detalhada, está preservada. O GCC precisa de monitoramento periódico.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--bb)"></div><div><strong>Contexto neurológico:</strong> A piora do campo visual é consistente com o quadro de polineuropatia e deve ser acompanhada em conjunto pela neurologista e pelo oftalmologista.</div></div>
+    </div>
+  </div>
+</div>
+
+<footer>Dashboard de saúde · Uso pessoal e clínico · Atualizado em maio/2026</footer>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+(function(){
+'use strict';
+
+if(!document.getElementById('home')){return;}
+if(typeof Chart==='undefined'){
+  document.querySelector('.dr').innerHTML='<p style="padding:40px;color:#e066a8">Carregando gráficos... Aguarde e recarregue a página.</p>';
+  return;
+}
+
+Chart.defaults.color='#8892b0';
+Chart.defaults.borderColor='#2d3654';
+Chart.defaults.font.family="'Inter',sans-serif";
+Chart.defaults.font.size=13;
+
+const D={
+  "Vitamina D":{u:"ng/mL",r:"Ideal: <b>30–60</b>",lr:20,lw:30,h:null,
+    v:[{d:"jul/22",v:4.3},{d:"mai/24",v:9.9},{d:"jun/24",v:13.1},{d:"ago/24",v:23.6},{d:"mar/25",v:32.7},{d:"set/25",v:48.1}]},
+  "Vitamina B12":{u:"pg/mL",r:"Ref: 187–883 · Ideal: <b>&gt;300</b>",lr:187,lw:300,h:883,
+    v:[{d:"jan/23",v:210},{d:"mai/24",v:157},{d:"jun/24",v:175},{d:"ago/24",v:303},{d:"set/24",v:350},{d:"mar/25",v:520},{d:"set/25",v:776}]},
+  "PCR":{u:"mg/dL",r:"Ref: <b>&lt;0,5</b>",h:0.5,hw:1.0,
+    v:[{d:"mar/23",v:3.7},{d:"abr/25",v:2.0},{d:"nov/25",v:2.88}]},
+  "Colesterol Total":{u:"mg/dL",r:"Ideal: <b>&lt;200</b> · Alto: &gt;240",h:200,hw:240,
+    v:[{d:"dez/21",v:276},{d:"jul/22",v:265},{d:"jun/24",v:247},{d:"jan/25",v:284},{d:"mar/25",v:237},{d:"set/25",v:171}]},
+  "LDL":{u:"mg/dL",r:"Ideal: <b>&lt;130</b> · Alto: &gt;160",h:130,hw:160,
+    v:[{d:"dez/21",v:210.9},{d:"jul/22",v:186},{d:"jun/24",v:164},{d:"mar/25",v:160},{d:"set/25",v:109}]},
+  "Potássio":{u:"mEq/L",r:"Ref: <b>3,5–5,5</b>",lr:3.5,h:5.5,
+    v:[{d:"jan/23",v:4.1},{d:"mar/23",v:3.0},{d:"jun/24",v:3.0},{d:"mar/25",v:3.2},{d:"mar/25b",v:3.3},{d:"abr/25",v:4.0},{d:"nov/25",v:4.8}]},
+  "Hemoglobina":{u:"g/dL",r:"Ref: <b>11,5–16,5</b>",lr:11.5,h:16.5,
+    v:[{d:"dez/21",v:14.0},{d:"jan/23",v:13.9},{d:"mai/24",v:16.6},{d:"jan/25",v:15.0},{d:"set/25",v:13.8}]},
+  "Albumina":{u:"g/dL",r:"Ref: <b>3,4–5,0</b>",lr:3.4,h:5.0,
+    v:[{d:"jan/23",v:4.5},{d:"mai/24",v:4.6},{d:"set/25",v:2.8}]},
+  "Linfócitos":{u:"%",r:"Ref: <b>20–35</b>",lr:20,h:35,
+    v:[{d:"dez/21",v:38},{d:"jul/22",v:43.8},{d:"jan/23",v:48.3},{d:"mai/24",v:37.4},{d:"ago/24",v:36.6},{d:"jan/25",v:39},{d:"set/25a",v:16},{d:"set/25b",v:28.1}]},
+  "Monócitos":{u:"%",r:"Ref: <b>4–8</b>",lr:4,h:8,
+    v:[{d:"jun/24",v:8.5},{d:"ago/24",v:8.5},{d:"jan/25",v:9.4},{d:"mar/25",v:8.6},{d:"set/25",v:13.6}]},
+  "Ácido Fólico":{u:"ng/mL",r:"Normal: <b>6–20</b>",lr:3,lw:6,h:20,
+    v:[{d:"jan/23",v:4},{d:"mai/24",v:1.9},{d:"ago/24",v:67.5},{d:"mar/25",v:14}]},
+  "Ferritina":{u:"µg/L",r:"Ref: <b>4,5–170</b>",lr:4.5,h:170,
+    v:[{d:"mai/24",v:62},{d:"mar/25",v:89},{d:"set/25",v:58.8}]},
+  "HDL":{u:"mg/dL",r:"Ideal: <b>&gt;40</b>",lr:40,
+    v:[{d:"dez/21",v:39.5},{d:"jun/24",v:49},{d:"set/25",v:46}]},
+  "Triglicerídeos":{u:"mg/dL",r:"Ideal: <b>&lt;170</b>",h:170,
+    v:[{d:"dez/21",v:113},{d:"jul/22",v:111},{d:"jun/24",v:134},{d:"set/25",v:78}]},
+};
+
+function st(v,d){
+  if(d.lr!=null&&v<d.lr)return'a';
+  if(d.lw!=null&&v<d.lw)return'w';
+  if(d.hw!=null&&v>d.hw)return'a';
+  if(d.h!=null&&v>d.h)return'w';
+  return'o';
+}
+function pc(v,d){
+  const s=st(v,d);
+  return s==='a'?'#e066a8':s==='w'?'#c084fc':'#4ade80';
+}
+
+// ALERTAS
+function bAlerts(){
+  const ag=document.getElementById('alertGrid');
+  const ig=document.getElementById('improvedGrid');
+  if(!ag)return;
+  Object.entries(D).forEach(([n,d])=>{
+    if(!d.v.length)return;
+    const l=d.v[d.v.length-1];
+    const s=st(l.v,d);
+    const bad=d.v.some(p=>st(p.v,d)!=='o');
+    const vc=s==='a'?'var(--pk)':s==='w'?'var(--pu)':'var(--gn)';
+    const c=`<div class="ac ${s==='o'?'ok':''}">
+      <div class="an">${n}</div>
+      <div class="av" style="color:${vc}">${l.v}</div>
+      <div class="ar">${d.u} · ${d.r}</div>
+      <div class="ad">${l.d}</div>
+      <span class="bdg ${s==='o'?'bdg-o':'bdg-a'}">${s==='o'?'✓ Normal':'✗ Alterado'}</span>
+    </div>`;
+    if(s!=='o')ag.innerHTML+=c;
+    else if(bad)ig.innerHTML+=c;
+  });
+}
+
+// SANGUE
+let MC=null;
+function bMarkers(){
+  const g=document.getElementById('markerGrid');
+  if(!g)return;
+  Object.keys(D).forEach((n,i)=>{
+    const l=D[n].v[D[n].v.length-1];
+    const s=st(l.v,D[n]);
+    const b=document.createElement('button');
+    b.className=`mb${s==='a'?' ma':''}${i===0?' on':''}`;
+    b.textContent=n;
+    b.onclick=()=>{
+      document.querySelectorAll('.mb').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on');
+      dChart(n);
+    };
+    g.appendChild(b);
+  });
+  dChart(Object.keys(D)[0]);
+}
+
+function dChart(n){
+  const d=D[n];
+  const t=document.getElementById('cT');
+  const s=document.getElementById('cS');
+  const r=document.getElementById('cR');
+  if(!t)return;
+  t.textContent=n; s.textContent=d.u; r.innerHTML=d.r;
+  const ctx=document.getElementById('mainChart').getContext('2d');
+  if(MC)MC.destroy();
+  MC=new Chart(ctx,{
+    type:'line',
+    data:{labels:d.v.map(p=>p.d),datasets:[{
+      data:d.v.map(p=>p.v),borderColor:'#4f8ef7',
+      backgroundColor:'rgba(79,142,247,0.07)',
+      pointBackgroundColor:d.v.map(p=>pc(p.v,d)),
+      pointBorderColor:d.v.map(p=>pc(p.v,d)),
+      pointRadius:7,pointHoverRadius:10,
+      tension:0.3,fill:true,borderWidth:2.5
+    }]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{
+        backgroundColor:'#1d2435',borderColor:'#2d3654',borderWidth:1,
+        titleColor:'#e8edf8',bodyColor:'#8892b0',padding:12,cornerRadius:8,
+        callbacks:{label:c=>` ${c.parsed.y} ${d.u}`}
+      }},
+      scales:{
+        x:{grid:{color:'#1d2435'},ticks:{font:{size:12}}},
+        y:{grid:{color:'#1d2435'},ticks:{font:{size:12}}}
+      }
+    }
+  });
+  const row=document.getElementById('dotsRow');
+  row.innerHTML='';
+  d.v.forEach(p=>{
+    const col=pc(p.v,d);
+    row.innerHTML+=`<span class="di"><span class="dot" style="background:${col}"></span>${p.d}: ${p.v}</span>`;
+  });
+}
+
+// DENSIT
+function bDensit(){
+  const el=document.getElementById('densitChart');
+  if(!el)return;
+  new Chart(el.getContext('2d'),{
+    type:'bar',
+    data:{labels:['Coluna L1–L4','TBS'],datasets:[
+      {label:'jan/2022',data:[0.5,null],backgroundColor:'rgba(74,222,128,0.6)',borderRadius:7},
+      {label:'mar/2025',data:[-0.9,-0.9],backgroundColor:'rgba(192,132,252,0.6)',borderRadius:7}
+    ]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:true,labels:{color:'#8892b0',font:{size:13},padding:16}},
+        tooltip:{backgroundColor:'#1d2435',borderColor:'#2d3654',borderWidth:1,
+          titleColor:'#e8edf8',bodyColor:'#8892b0',padding:12}},
+      scales:{
+        x:{grid:{color:'#1d2435'},ticks:{color:'#8892b0',font:{size:13}}},
+        y:{grid:{color:'#1d2435'},ticks:{color:'#8892b0',font:{size:13}},
+          min:-2.5,max:2,title:{display:true,text:'T-score',color:'#8892b0',font:{size:12}}}
+      }
+    }
+  });
+}
+
+// CV
+function bCV(){
+  const el=document.getElementById('cvChart');
+  if(!el)return;
+  new Chart(el.getContext('2d'),{
+    type:'line',
+    data:{labels:['out/2022','jan/2026'],datasets:[
+      {label:'OD (olho direito)',data:[-0.15,-3.5],borderColor:'#4f8ef7',
+        backgroundColor:'rgba(79,142,247,0.07)',
+        pointBackgroundColor:['#4ade80','#e066a8'],pointRadius:8,
+        tension:0.3,fill:true,borderWidth:2.5},
+      {label:'OE (olho esquerdo)',data:[-0.62,-5.5],borderColor:'#c084fc',
+        backgroundColor:'rgba(192,132,252,0.07)',
+        pointBackgroundColor:['#4ade80','#e066a8'],pointRadius:8,
+        tension:0.3,fill:true,borderWidth:2.5}
+    ]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:true,labels:{color:'#8892b0',font:{size:13},padding:16}},
+        tooltip:{backgroundColor:'#1d2435',borderColor:'#2d3654',borderWidth:1,
+          titleColor:'#e8edf8',bodyColor:'#8892b0',padding:12,
+          callbacks:{label:c=>` ${c.dataset.label}: MD ${c.parsed.y} dB`}}},
+      scales:{
+        x:{grid:{color:'#1d2435'},ticks:{color:'#8892b0',font:{size:13}}},
+        y:{grid:{color:'#1d2435'},ticks:{color:'#8892b0',font:{size:13}},
+          title:{display:true,text:'MD (dB)',color:'#8892b0',font:{size:12}}}
+      }
+    }
+  });
+}
+
+// Use event listeners instead of onclick (works with WordPress CSP)
+document.querySelectorAll('.dt').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var id=this.getAttribute('data-tab');
+    document.querySelectorAll('.ds').forEach(function(s){s.classList.remove('on');});
+    document.querySelectorAll('.dt').forEach(function(t){t.classList.remove('on');});
+    document.getElementById(id).classList.add('on');
+    btn.classList.add('on');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+bAlerts();
+bMarkers();
+bDensit();
+bCV();
+})();
+});
+</script>
+</body>
+</html>
