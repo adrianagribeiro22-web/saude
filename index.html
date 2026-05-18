@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard de Saúde</title>
+<title>Dashboard de Saúde — Adriana</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -11,9 +11,7 @@
 .dr{
   --bg:#000000;--s1:#0a0e1a;--s2:#0f1525;--s3:#141c30;
   --bd:#1e2d50;--tx:#e8edf8;--mu:#7a88b0;
-  --ac:#4f8ef7;--pk:#e066a8;--pu:#c084fc;--gn:#60a5fa;--bb:#60a5fa;
-  margin-top:0;
-  padding:0;
+  --ac:#4f8ef7;--pk:#e066a8;--pu:#c084fc;--gn:#4ade80;--bb:#60a5fa;
   font-family:'Inter',sans-serif;font-size:18px;
   background:var(--bg);color:var(--tx);min-height:100vh;
   -webkit-text-size-adjust:100%;
@@ -32,24 +30,24 @@
   position:sticky;top:0;z-index:199;overflow-x:auto;scrollbar-width:none}
 .dn::-webkit-scrollbar{display:none}
 .dt{padding:14px 16px;background:transparent;border:none;border-bottom:3px solid transparent;
-  color:var(--mu);font-size:17px;font-weight:500;cursor:pointer;white-space:nowrap;
+  color:var(--mu);font-size:16px;font-weight:500;cursor:pointer;white-space:nowrap;
   transition:all .2s;font-family:'Inter',sans-serif;flex-shrink:0}
 .dt:hover{color:var(--tx);background:var(--s2)}
 .dt.on{color:var(--bb);border-bottom-color:var(--bb);background:var(--s2);font-weight:700}
 .ds{display:none;padding:20px;max-width:960px}
 .ds.on{display:block}
 .st{font-family:'Lora',serif;font-size:24px;color:var(--tx);margin-bottom:4px}
-.ss{color:var(--mu);font-size:16px;margin-bottom:22px;line-height:1.5}
+.ss{color:var(--mu);font-size:15px;margin-bottom:22px;line-height:1.5}
 .card{background:var(--s1);border:1px solid var(--bd);border-radius:14px;
   padding:20px;margin-bottom:18px;box-shadow:0 4px 20px rgba(0,0,0,.35)}
 .ch{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;gap:8px}
 .ct{font-weight:700;font-size:18px;color:var(--tx)}
-.cs{font-size:15px;color:var(--mu);margin-top:3px}
+.cs{font-size:14px;color:var(--mu);margin-top:3px}
 .rp{font-size:12px;padding:4px 12px;border-radius:20px;background:var(--s3);
   border:1px solid var(--bd);color:var(--mu);white-space:nowrap}
-.ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:12px;margin-bottom:24px}
+.ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;margin-bottom:24px}
 .ac{background:var(--s2);border:1px solid var(--bd);border-left:4px solid var(--pk);
-  border-radius:12px;padding:14px;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+  border-radius:12px;padding:14px}
 .ac.ok{border-left-color:var(--gn)}
 .ac .an{font-size:12px;color:var(--mu);margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
 .ac .av{font-family:'Lora',serif;font-size:24px;line-height:1;color:var(--pk)}
@@ -84,7 +82,7 @@
   color:var(--mu);text-transform:uppercase;letter-spacing:.4px;font-weight:600}
 .tb th:first-child{border-radius:10px 0 0 0}
 .tb th:last-child{border-radius:0 10px 0 0}
-.tb td{padding:12px 14px;border-bottom:1px solid var(--bd);vertical-align:top;line-height:1.5}
+.tb td{padding:11px 14px;border-bottom:1px solid var(--bd);vertical-align:middle;font-size:14px}
 .tb tr:last-child td{border-bottom:none}
 .tb tr:hover td{background:var(--s3)}
 .tg{display:inline-block;padding:3px 10px;border-radius:8px;font-size:12px;font-weight:600}
@@ -96,16 +94,40 @@
 .dc{background:var(--s3);border:1px solid var(--bd);border-radius:10px;padding:14px;text-align:center}
 .dc .dl{font-size:11px;color:var(--mu);margin-bottom:5px;line-height:1.3}
 .dc .dv{font-family:'Lora',serif;font-size:22px;line-height:1}
-.dc .ds{font-size:11px;color:var(--mu);margin-top:3px}
+.dc .ds2{font-size:11px;color:var(--mu);margin-top:3px}
 .eb{display:grid;gap:14px}
 .ei{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.6;color:var(--mu)}
 .ei strong{color:var(--tx)}
 .ed{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:7px}
-.hc{background:linear-gradient(135deg,#1a2140,#1a1030);border:1px solid var(--bd);
-  border-radius:14px;padding:28px;margin-bottom:18px}
-.hc h2{font-family:'Lora',serif;font-size:20px;background:linear-gradient(135deg,#60a5fa,#c084fc);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
-.hc p{color:var(--mu);font-size:14px;line-height:1.7;margin-bottom:10px}
+/* APRESENTAÇÃO */
+.ap-block{background:linear-gradient(135deg,#0d1117 0%,#1a2140 50%,#1a1030 100%);
+  border:1px solid var(--bd);border-radius:16px;padding:28px 24px;margin-bottom:20px;position:relative;overflow:hidden}
+.ap-block::before{content:'';position:absolute;top:-50px;right:-50px;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(79,142,247,.10),transparent 70%);pointer-events:none}
+.ap-block h2{font-family:'Lora',serif;font-size:20px;
+  background:linear-gradient(135deg,#60a5fa,#c084fc);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px;line-height:1.3}
+.ap-block p{color:var(--mu);font-size:14px;line-height:1.8;margin-bottom:10px}
+.ap-block p:last-child{margin-bottom:0}
+.ap-block strong{color:var(--tx)}
+.ap-divider{height:1px;background:linear-gradient(90deg,transparent,var(--bd),transparent);margin:18px 0}
+.ap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:12px;margin:14px 0}
+.ap-item{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:14px 16px}
+.ap-label{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:5px}
+.ap-val{font-size:14px;color:var(--tx);line-height:1.4}
+.ap-val a{color:var(--ac);text-decoration:none}
+.ap-cid{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.ap-cid span{background:rgba(79,142,247,.12);border:1px solid rgba(79,142,247,.3);
+  border-radius:8px;padding:6px 14px;font-size:13px;color:var(--ac);font-weight:600}
+.ap-linkbox{background:rgba(79,142,247,.06);border:1px solid rgba(79,142,247,.2);
+  border-radius:12px;padding:16px 18px;margin-top:16px;display:flex;align-items:flex-start;gap:12px}
+.ap-linkbox-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.ap-linkbox-text{font-size:13px;color:var(--mu);line-height:1.7}
+.ap-linkbox-text a{color:var(--ac);font-weight:600;text-decoration:none}
+.sr{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px;margin-top:18px}
+.sc{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:14px;text-align:center}
+.sn{font-family:'Lora',serif;font-size:28px;color:var(--ac);line-height:1}
+.sk{font-size:12px;color:var(--mu);margin-top:4px}
 .cr{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 .cb{padding:10px 20px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;
   border:none;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
@@ -113,12 +135,11 @@
 .cw2{background:rgba(74,222,128,.15);border:1px solid var(--gn);color:var(--gn)}
 .ce:hover{background:var(--ac);color:#0d1117}
 .cw2:hover{background:var(--gn);color:#0d1117}
-.sr{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:16px}
-.sc{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:14px;text-align:center}
-.sn{font-family:'Lora',serif;font-size:28px;color:var(--ac);line-height:1}
-.sk{font-size:12px;color:var(--mu);margin-top:4px}
 .warn-box{background:rgba(224,102,168,.08);border:1px solid rgba(224,102,168,.3);
   border-radius:8px;padding:10px 14px;margin-top:14px;font-size:13px;color:var(--pk)}
+/* Urina table */
+.ur-ok{color:var(--gn)}
+.ur-al{color:var(--pk);font-weight:700}
 footer{text-align:center;padding:32px 20px;color:var(--mu);font-size:13px;
   border-top:1px solid var(--bd);margin-top:10px}
 @media(max-width:600px){
@@ -126,76 +147,117 @@ footer{text-align:center;padding:32px 20px;color:var(--mu);font-size:13px;
   .cw{height:185px}
   .ag{grid-template-columns:repeat(2,1fr)}
   .dg{grid-template-columns:repeat(2,1fr)}
-  .dt{padding:12px 13px;font-size:14px}
+  .dt{padding:11px 11px;font-size:13px}
+  .ap-block{padding:20px 16px}
+  .ap-grid{grid-template-columns:1fr 1fr}
 }
-
-.tab-radio { display: none !important; }
-.ds { display: none !important; }
-#r-home:checked ~ .dn ~ .ds-home { display: block !important; }
-#r-al:checked ~ .dn ~ .ds-al { display: block !important; }
-#r-sg:checked ~ .dn ~ .ds-sg { display: block !important; }
-#r-de:checked ~ .dn ~ .ds-de { display: block !important; }
-#r-ne:checked ~ .dn ~ .ds-ne { display: block !important; }
-#r-of:checked ~ .dn ~ .ds-of { display: block !important; }
-#r-home:checked ~ .dn label[for="r-home"],
+.tab-radio{display:none !important}
+.ds{display:none !important}
+#r-ap:checked ~ .dn ~ .ds-ap{display:block !important}
+#r-al:checked ~ .dn ~ .ds-al{display:block !important}
+#r-sg:checked ~ .dn ~ .ds-sg{display:block !important}
+#r-ur:checked ~ .dn ~ .ds-ur{display:block !important}
+#r-re:checked ~ .dn ~ .ds-re{display:block !important}
+#r-de:checked ~ .dn ~ .ds-de{display:block !important}
+#r-ne:checked ~ .dn ~ .ds-ne{display:block !important}
+#r-of:checked ~ .dn ~ .ds-of{display:block !important}
+#r-ap:checked ~ .dn label[for="r-ap"],
 #r-al:checked ~ .dn label[for="r-al"],
 #r-sg:checked ~ .dn label[for="r-sg"],
+#r-ur:checked ~ .dn label[for="r-ur"],
+#r-re:checked ~ .dn label[for="r-re"],
 #r-de:checked ~ .dn label[for="r-de"],
 #r-ne:checked ~ .dn label[for="r-ne"],
-#r-of:checked ~ .dn label[for="r-of"] {
-  color: var(--bb) !important;
-  border-bottom: 3px solid var(--bb) !important;
-  background: var(--s2) !important;
-  font-weight: 700 !important;
+#r-of:checked ~ .dn label[for="r-of"]{
+  color:var(--bb) !important;
+  border-bottom:3px solid var(--bb) !important;
+  background:var(--s2) !important;
+  font-weight:700 !important;
 }
 </style>
 </head>
 <body>
 <div class="dr">
 <div class="dh" style="position:relative;top:auto">
-  <h1>💙 Dashboard de Saúde</h1>
+  <h1>💙 Dashboard de Saúde — Adriana</h1>
   <div class="dh-sub">
-    <span>Última atualização: <strong style="color:var(--bb)">07/05/2026</strong></span>
-    <a href="https://docs.google.com/spreadsheets/d/1jlMoJ_J3Shn0Tq-Kr0y3cvGZJgFYmga0/edit?usp=drivesdk&ouid=104893621434881397376&rtpof=true&sd=true" target="_blank">📊 Planilha Completa</a>
+    <span>Última atualização: <strong style="color:var(--bb)">17/05/2026</strong></span>
+    <a href="https://docs.google.com/spreadsheets/d/1LI6UOAQk02aNnnWv8Vjy4fGKKN-UZi3e/edit?usp=drivesdk&ouid=104893621434881397376&rtpof=true&sd=true" target="_blank">📊 Planilha Completa</a>
   </div>
 </div>
 
-<input type="radio" name="tab" id="r-home" class="tab-radio" checked>
+<input type="radio" name="tab" id="r-ap" class="tab-radio" checked>
 <input type="radio" name="tab" id="r-al" class="tab-radio">
 <input type="radio" name="tab" id="r-sg" class="tab-radio">
+<input type="radio" name="tab" id="r-ur" class="tab-radio">
+<input type="radio" name="tab" id="r-re" class="tab-radio">
 <input type="radio" name="tab" id="r-de" class="tab-radio">
 <input type="radio" name="tab" id="r-ne" class="tab-radio">
 <input type="radio" name="tab" id="r-of" class="tab-radio">
 <div class="dn">
-  <label class="dt" for="r-home">🏠 Início</label>
+  <label class="dt" for="r-ap">📋 Apresentação</label>
   <label class="dt" for="r-al">⚠️ Alertas</label>
   <label class="dt" for="r-sg">🩸 Sangue</label>
+  <label class="dt" for="r-ur">🧪 Urina</label>
+  <label class="dt" for="r-re">🔬 Reumatologia</label>
   <label class="dt" for="r-de">🦴 Densitometria</label>
   <label class="dt" for="r-ne">🧠 Neurológico</label>
   <label class="dt" for="r-of">👁️ Oftalmológico</label>
 </div>
 
-<!-- HOME -->
-<div id="home" class="ds ds-home">
-  <div class="hc">
-    <h2>Sobre este dashboard</h2>
-    <p>Este painel foi criado para acompanhar a evolução da minha saúde ao longo do tempo. Aqui estão registrados exames de sangue, avaliações neurológicas, oftalmológicas, densitometria óssea e outros dados clínicos desde 2021.</p>
-    <p>O objetivo é ter uma visão clara e organizada dos resultados, facilitando o acompanhamento médico e identificando tendências com mais facilidade.</p>
-    <p>A planilha completa com todos os detalhes, laudos e histórico de consultas está disponível no link acima.<br>
-    <span style="font-size:13px;color:var(--mu)">⚠️ O arquivo está no Google Drive com permissão de visualização para todos. Se receber aviso de acesso negado, tente abrir em outro navegador ou trocar de conta Google.</span></p>
+<!-- APRESENTAÇÃO (fusão das abas Início + Apresentação) -->
+<div id="ap" class="ds ds-ap">
+
+  <!-- bloco principal: quem sou, o que é isso -->
+  <div class="ap-block">
+    <h2>Painel de Monitoramento de Saúde — Adriana Gonçalves Ribeiro</h2>
+    <p>Este painel e a planilha que o alimenta centralizam o histórico de exames e eventos de saúde desde setembro de 2021, com o objetivo de facilitar a análise de tendências, a comparação de marcadores ao longo do tempo e o acompanhamento médico multidisciplinar.</p>
+    <p>Os gráficos e alertas aqui apresentados são gerados a partir dos dados da <strong>planilha completa</strong> — que contém o histórico integral desde os primeiros sintomas, incluindo todas as consultas, sintomas registrados, exames laboratoriais com valores brutos de cada coleta, e links diretos para os PDFs de cada laudo.</p>
+    <p style="font-size:13px;font-style:italic">O dashboard é a face visual da planilha. As duas ferramentas foram criadas para funcionar juntas — uma é a continuação da outra.</p>
     <div class="sr">
-      <div class="sc"><div class="sn">46</div><div class="sk">Exames registrados</div></div>
-      <div class="sc"><div class="sn">18</div><div class="sk">Coletas de sangue</div></div>
+      <div class="sc"><div class="sn">47</div><div class="sk">Exames registrados</div></div>
+      <div class="sc"><div class="sn">19</div><div class="sk">Coletas de sangue</div></div>
       <div class="sc"><div class="sn">4+</div><div class="sk">Anos de histórico</div></div>
       <div class="sc"><div class="sn">8</div><div class="sk">Especialidades</div></div>
     </div>
+    <div class="ap-linkbox" style="margin-top:20px">
+      <span class="ap-linkbox-icon">📊</span>
+      <span class="ap-linkbox-text">
+        <strong style="color:var(--tx)">Planilha completa com todo o histórico desde o início dos sintomas:</strong><br>
+        <a href="https://docs.google.com/spreadsheets/d/1LI6UOAQk02aNnnWv8Vjy4fGKKN-UZi3e/edit?usp=drivesdk&ouid=104893621434881397376&rtpof=true&sd=true" target="_blank">Abrir no Google Drive →</a>
+        <span style="display:block;margin-top:4px;font-size:12px">⚠️ Se receber aviso de acesso negado, tente em outro navegador ou com outra conta Google.</span>
+      </span>
+    </div>
   </div>
-  <div class="hc">
-    <h2>Tem alguma ideia de como melhorar?</h2>
-    <p>Se você é profissional de saúde ou tem sugestões de como tornar este painel mais útil, adoraria ouvir!</p>
+
+  <!-- bloco: para profissionais de saúde -->
+  <div class="ap-block">
+    <h2>Ao Profissional de Saúde</h2>
+    <p>Esta ferramenta foi desenvolvida para oferecer uma visão clara e cronológica da minha evolução clínica. Atualmente investigo a correlação entre <strong>Polineuropatia Sensitivo-Motora Axonal crônica</strong>, deficiência severa de vitamina B12 e sintomas articulares em acompanhamento reumatológico.</p>
+    <p>Aqui você encontra os principais marcadores laboratoriais em formato de gráfico evolutivo, alertas para valores fora da referência, e resumos dos exames neurológicos, oftalmológicos e de densitometria. <strong>Na planilha completa</strong> estão organizados:</p>
+    <div class="ap-grid">
+      <div class="ap-item"><div class="ap-label">📅 Linha do tempo</div><div class="ap-val">Consultas, sintomas e medicamentos desde set/2021 na aba "História"</div></div>
+      <div class="ap-item"><div class="ap-label">🩸 Laboratorial</div><div class="ap-val">Todos os valores brutos de cada coleta, separados por grupo de exame</div></div>
+      <div class="ap-item"><div class="ap-label">📄 Laudos em PDF</div><div class="ap-val">Links clicáveis para os PDFs originais de cada exame no Drive</div></div>
+      <div class="ap-item"><div class="ap-label">🧠 Especializados</div><div class="ap-val">ENMG, potenciais evocados, densitometria, oftalmologia e punção lombar</div></div>
+    </div>
+  </div>
+
+  <!-- bloco: diagnóstico e dados pessoais -->
+  <div class="ap-block">
+    <h2>Diagnóstico e Situação Atual</h2>
+    <p>Quadro de <strong>Polineuropatia e Degeneração Combinada da Medula</strong> por deficiência de Vitamina B12, confirmada por RM cervical e ENMG, com sintomas iniciados em setembro de 2021 e progressão comprimento-dependente para os quatro membros. Realizando acompanhamento multidisciplinar na <strong>Rede SARAH</strong> (neurologia) e investigação reumatológica em andamento.</p>
+    <div class="ap-cid">
+      <span>CID G32.0 — Degeneração combinada da medula</span>
+      <span>CID G63.44 — Polineuropatia por carência de B12</span>
+    </div>
+    <p style="margin-top:16px">Tem sugestões ou é profissional de saúde com ideias para melhorar este painel? Adoraria ouvir!</p>
     <div class="cr">
       <a href="mailto:adrianagribeiro22@gmail.com" class="cb ce">✉️ adrianagribeiro22@gmail.com</a>
-      <a href="https://wa.me/5521998476690" class="cb cw2" target="_blank" title="WhatsApp" style="display:inline-flex;align-items:center;gap:8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      <a href="https://wa.me/5521998476690" class="cb cw2" target="_blank" style="display:inline-flex;align-items:center;gap:8px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
     </div>
   </div>
 </div>
@@ -206,12 +268,22 @@ footer{text-align:center;padding:32px 20px;color:var(--mu);font-size:13px;
   <p class="ss">Itens fora do limite de referência no último exame disponível</p>
   <div class="pcr">
     <div class="pcrt">⚠️ PCR — Inflamação Crônica Persistente</div>
-    <p class="pcrx">A Proteína C-Reativa esteve elevada nas <strong style="color:var(--pk)">3 vezes que foi medida</strong>, nunca normalizando. O valor de referência é abaixo de 0,5 mg/dL. Isso indica um processo inflamatório ativo contínuo, consistente com o quadro neurológico. <strong style="color:var(--tx)">Vale discutir explicitamente com a médica.</strong></p>
+    <p class="pcrx">A Proteína C-Reativa esteve elevada em <strong style="color:var(--pk)">todas as 4 medições</strong>, nunca normalizando. O valor de referência é abaixo de 0,5 mg/dL. Indica processo inflamatório ativo contínuo, consistente com o quadro neurológico e reumatológico em investigação. <strong style="color:var(--tx)">Vale discutir explicitamente com os médicos.</strong></p>
     <div class="pcrp">
       <span style="font-size:13px;color:var(--mu);width:100%;display:block;margin-bottom:4px">Histórico PCR:</span>
       <span class="pp">mar/2023: 3,7</span>
       <span class="pp">abr/2025: 2,0</span>
       <span class="pp">nov/2025: 2,88</span>
+      <span class="pp">abr/2026: 1,12</span>
+    </div>
+  </div>
+  <div class="pcr" style="border-color:var(--pu);box-shadow:0 4px 24px rgba(192,132,252,.15)">
+    <div class="pcrt" style="color:var(--pu)">⚠️ Complemento C4 — Elevação Expressiva</div>
+    <p class="pcrx">O Complemento C4 chegou a <strong style="color:var(--pu)">99 mg/dL</strong> (ref: 12–36 mg/dL), quase 3× o limite superior. O C3 também acima (144 mg/dL, ref: 75–135). Complemento elevado — e não consumido — em contexto inflamatório ativo sugere resposta de fase aguda. <strong style="color:var(--tx)">Levar para avaliação reumatológica.</strong></p>
+    <div class="pcrp" style="margin-top:10px">
+      <span style="background:rgba(192,132,252,.2);border-color:var(--pu);color:var(--pu)" class="pp">C3: 144 mg/dL (ref ≤135)</span>
+      <span style="background:rgba(192,132,252,.2);border-color:var(--pu);color:var(--pu)" class="pp">C4: 99 mg/dL (ref ≤36)</span>
+      <span style="background:rgba(192,132,252,.2);border-color:var(--pu);color:var(--pu)" class="pp">Aldolase: 9,2 U/L (ref ≤7,6)</span>
     </div>
   </div>
   <p class="sl">Fora do limite no último exame</p>
@@ -235,6 +307,68 @@ footer{text-align:center;padding:32px 20px;color:var(--mu);font-size:13px;
   </div>
 </div>
 
+<!-- URINA -->
+<div id="ur" class="ds ds-ur">
+  <p class="st">Exame de Urina (EAS)</p>
+  <p class="ss">Rotina de Urina Tipo I — 4 coletas realizadas na Rede SARAH</p>
+  <div class="card">
+    <div class="ch"><div><div class="ct">Resultados comparativos</div><div class="cs">Todos os exames dentro da normalidade</div></div><span class="tg to">Normal</span></div>
+    <div style="overflow-x:auto">
+      <table class="tb">
+        <thead>
+          <tr>
+            <th>Parâmetro</th>
+            <th>Ref.</th>
+            <th>16/12/2024</th>
+            <th>27/01/2025</th>
+            <th>20/03/2025</th>
+            <th>24/09/2025</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="6" style="background:var(--s3);color:var(--mu);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;padding:8px 14px">Características Físicas</td></tr>
+          <tr>
+            <td>Cor</td><td style="color:var(--mu);font-size:12px">Amarelo-claro</td>
+            <td class="ur-ok">Amarelo-claro</td><td class="ur-ok">Amarelo-claro</td><td class="ur-ok">Amarelo-claro</td><td class="ur-ok">Amarelo-citrino</td>
+          </tr>
+          <tr>
+            <td>Aspecto</td><td style="color:var(--mu);font-size:12px">Límpido</td>
+            <td class="ur-ok">Límpido</td><td class="ur-ok">Límpido</td><td class="ur-ok">Límpido</td><td class="ur-ok">Límpido</td>
+          </tr>
+          <tr><td colspan="6" style="background:var(--s3);color:var(--mu);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;padding:8px 14px">Bioquímica</td></tr>
+          <tr><td>Densidade</td><td style="color:var(--mu);font-size:12px">1,002–1,030</td><td class="ur-ok">1,005</td><td class="ur-ok">1,010</td><td class="ur-ok">1,005</td><td class="ur-ok">1,010</td></tr>
+          <tr><td>pH</td><td style="color:var(--mu);font-size:12px">4,5–8,0</td><td class="ur-ok">6,5</td><td class="ur-ok">6,0</td><td class="ur-ok">6,5</td><td class="ur-ok">6,0</td></tr>
+          <tr><td>Esterase Leucocitária</td><td style="color:var(--mu);font-size:12px">Negativo</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td></tr>
+          <tr><td>Nitrito</td><td style="color:var(--mu);font-size:12px">Negativo</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td></tr>
+          <tr><td>Proteínas</td><td style="color:var(--mu);font-size:12px">Negativo</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td></tr>
+          <tr><td>Glicose</td><td style="color:var(--mu);font-size:12px">Negativo</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td></tr>
+          <tr><td>Cetonas</td><td style="color:var(--mu);font-size:12px">Negativo</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td></tr>
+          <tr><td>Urobilinogênio</td><td style="color:var(--mu);font-size:12px">&lt; 1,0 mg/dL</td><td class="ur-ok">0,2</td><td class="ur-ok">0,2</td><td class="ur-ok">0,2</td><td class="ur-ok">0,2</td></tr>
+          <tr><td>Bilirrubinas</td><td style="color:var(--mu);font-size:12px">Negativo</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td></tr>
+          <tr><td>Hemoglobina</td><td style="color:var(--mu);font-size:12px">Negativo</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td><td class="ur-ok">Neg.</td></tr>
+          <tr><td colspan="6" style="background:var(--s3);color:var(--mu);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;padding:8px 14px">Microscopia</td></tr>
+          <tr><td>Leucócitos</td><td style="color:var(--mu);font-size:12px">&lt; 10/campo</td><td class="ur-ok">1</td><td class="ur-ok">1</td><td class="ur-ok">0</td><td class="ur-ok">1</td></tr>
+          <tr><td>Hemácias</td><td style="color:var(--mu);font-size:12px">&lt; 3/campo</td><td class="ur-ok">1</td><td class="ur-ok">1</td><td class="ur-ok">0</td><td class="ur-ok">1</td></tr>
+          <tr><td>Bactérias</td><td style="color:var(--mu);font-size:12px">Ausentes</td><td style="color:var(--pu)">Raras</td><td style="color:var(--pu)">Raras</td><td class="ur-ok">Ausentes</td><td class="ur-ok">Ausentes</td></tr>
+          <tr><td>Filamentos de Muco</td><td style="color:var(--mu);font-size:12px">Ausentes/raros</td><td style="color:var(--mu)">Raros</td><td style="color:var(--mu)">Raros</td><td class="ur-ok">Ausentes</td><td style="color:var(--mu)">Raros</td></tr>
+          <tr><td>Cél. Epiteliais Escamosas</td><td style="color:var(--mu);font-size:12px">&lt; 10/campo</td><td style="color:var(--mu)">Raras</td><td style="color:var(--mu)">Raras</td><td style="color:var(--mu)">Raras</td><td style="color:var(--mu)">Raras</td></tr>
+          <tr><td>Cél. Epiteliais de Transição</td><td style="color:var(--mu);font-size:12px">Ausentes/raras</td><td style="color:var(--mu)">—</td><td style="color:var(--mu)">Raras</td><td style="color:var(--mu)">—</td><td style="color:var(--mu)">—</td></tr>
+          <tr><td>Bacterioscopia (Gram)</td><td style="color:var(--mu);font-size:12px">Negativo</td><td style="color:var(--mu)">—</td><td style="color:var(--mu)">—</td><td class="ur-ok">Negativo</td><td style="color:var(--mu)">—</td></tr>
+          <tr><td>Urocultura</td><td style="color:var(--mu);font-size:12px">Negativo</td><td class="ur-ok">Negativo</td><td style="color:var(--mu)">—</td><td style="color:var(--mu)">—</td><td style="color:var(--mu)">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card" style="margin-top:0">
+    <div class="ct" style="margin-bottom:14px">O que esses resultados significam</div>
+    <div class="eb">
+      <div class="ei"><div class="ed" style="background:var(--gn)"></div><div><strong>Urina normal em todas as coletas:</strong> Bioquímica, leucócitos, hemácias, pH e densidade consistentemente dentro da referência. Sem proteinúria, hematúria, glicosúria ou cetonúria.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--pu)"></div><div><strong>Bactérias raras em dez/2024 e jan/2025:</strong> Achado discreto, não associado a esterase leucocitária positiva ou nitrito, normalizado nas coletas seguintes. Provavelmente contaminação de coleta.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--bb)"></div><div><strong>Contexto da bexiga neurogênica:</strong> A vigilância urinária é importante pelo diagnóstico de bexiga neurogênica. Todos os exames até agora mostram função renal e urinária preservada.</div></div>
+    </div>
+  </div>
+</div>
+
 <!-- DENSITOMETRIA -->
 <div id="de" class="ds ds-de">
   <p class="st">Densitometria Óssea</p>
@@ -247,19 +381,19 @@ footer{text-align:center;padding:32px 20px;color:var(--mu);font-size:13px;
     <div class="card" style="margin:0">
       <div class="ch"><div><div class="ct">04/01/2022 — Guaratiba</div><div class="cs">DXA método padrão</div></div><span class="tg to">Normalidade</span></div>
       <div class="dg">
-        <div class="dc"><div class="dl">Coluna L1–L4</div><div class="dv" style="color:var(--gn)">+0,5</div><div class="ds">T-score</div></div>
-        <div class="dc"><div class="dl">DMO Coluna</div><div class="dv">1,245</div><div class="ds">g/cm²</div></div>
-        <div class="dc"><div class="dl">Colo do Fêmur</div><div class="dv" style="color:var(--gn)">+0,4</div><div class="ds">T-score</div></div>
-        <div class="dc"><div class="dl">Fêmur Total</div><div class="dv" style="color:var(--gn)">+0,5</div><div class="ds">T-score</div></div>
+        <div class="dc"><div class="dl">Coluna L1–L4</div><div class="dv" style="color:var(--gn)">+0,5</div><div class="ds2">T-score</div></div>
+        <div class="dc"><div class="dl">DMO Coluna</div><div class="dv">1,245</div><div class="ds2">g/cm²</div></div>
+        <div class="dc"><div class="dl">Colo do Fêmur</div><div class="dv" style="color:var(--gn)">+0,4</div><div class="ds2">T-score</div></div>
+        <div class="dc"><div class="dl">Fêmur Total</div><div class="dv" style="color:var(--gn)">+0,5</div><div class="ds2">T-score</div></div>
       </div>
     </div>
     <div class="card" style="margin:0">
       <div class="ch"><div><div class="ct">20/03/2025 — Rede Sarah</div><div class="cs">DXA com TBS</div></div><span class="tg tp">Osteopenia</span></div>
       <div class="dg">
-        <div class="dc"><div class="dl">Coluna L1–L4</div><div class="dv" style="color:var(--pu)">−0,9</div><div class="ds">T-score</div></div>
-        <div class="dc"><div class="dl">TBS</div><div class="dv" style="color:var(--gn)">1,386</div><div class="ds">&gt;1,230 ok</div></div>
-        <div class="dc"><div class="dl">TBS T-score</div><div class="dv" style="color:var(--pu)">−0,9</div><div class="ds">T-score</div></div>
-        <div class="dc"><div class="dl">Fêmur/Colo</div><div class="dv" style="color:var(--pu);font-size:15px">Osteopenia</div><div class="ds">ver laudo</div></div>
+        <div class="dc"><div class="dl">Coluna L1–L4</div><div class="dv" style="color:var(--pu)">−0,9</div><div class="ds2">T-score</div></div>
+        <div class="dc"><div class="dl">TBS</div><div class="dv" style="color:var(--gn)">1,386</div><div class="ds2">&gt;1,230 ok</div></div>
+        <div class="dc"><div class="dl">TBS T-score</div><div class="dv" style="color:var(--pu)">−0,9</div><div class="ds2">T-score</div></div>
+        <div class="dc"><div class="dl">Fêmur/Colo</div><div class="dv" style="color:var(--pu);font-size:15px">Osteopenia</div><div class="ds2">ver laudo</div></div>
       </div>
     </div>
   </div>
@@ -321,10 +455,10 @@ footer{text-align:center;padding:32px 20px;color:var(--mu);font-size:13px;
     <div class="card" style="margin:0">
       <div class="ch"><div class="ct">03/10/2022 — Campo Visual</div><span class="tg to">Normal</span></div>
       <div class="dg" style="grid-template-columns:repeat(2,1fr)">
-        <div class="dc"><div class="dl">OD — MD</div><div class="dv" style="color:var(--gn)">−0,15 dB</div><div class="ds">Normal</div></div>
-        <div class="dc"><div class="dl">OE — MD</div><div class="dv" style="color:var(--gn)">−0,62 dB</div><div class="ds">Normal geral</div></div>
+        <div class="dc"><div class="dl">OD — MD</div><div class="dv" style="color:var(--gn)">−0,15 dB</div><div class="ds2">Normal</div></div>
+        <div class="dc"><div class="dl">OE — MD</div><div class="dv" style="color:var(--gn)">−0,62 dB</div><div class="ds2">Normal geral</div></div>
         <div></div>
-        <div class="dc"><div class="dl">OE — STF</div><div class="dv" style="color:var(--pu);font-size:18px">2,22 dB</div><div class="ds">p&lt;10% alterado</div></div>
+        <div class="dc"><div class="dl">OE — STF</div><div class="dv" style="color:var(--pu);font-size:18px">2,22 dB</div><div class="ds2">p&lt;10% alterado</div></div>
       </div>
     </div>
     <div class="card" style="margin:0">
@@ -334,31 +468,222 @@ footer{text-align:center;padding:32px 20px;color:var(--mu);font-size:13px;
     <div class="card" style="margin:0">
       <div class="ch"><div class="ct">05/01/2026 — Paquimetria, Campo Visual e OCT</div><span class="tg ta">Alterado</span></div>
       <div class="dg">
-        <div class="dc"><div class="dl">Paquimetria OD</div><div class="dv">527 µm</div><div class="ds">Normal</div></div>
-        <div class="dc"><div class="dl">Paquimetria OE</div><div class="dv">533 µm</div><div class="ds">Normal</div></div>
-        <div class="dc"><div class="dl">Campo Visual OD</div><div class="dv" style="color:var(--pk)">−3,5 dB</div><div class="ds">p&lt;10% alterado</div></div>
-        <div class="dc"><div class="dl">Campo Visual OE</div><div class="dv" style="color:var(--pk)">−5,5 dB</div><div class="ds">p&lt;5% alterado</div></div>
-        <div class="dc"><div class="dl">RNFL OD</div><div class="dv" style="color:var(--pu)">75 µm</div><div class="ds">limite inferior</div></div>
-        <div class="dc"><div class="dl">RNFL OE</div><div class="dv" style="color:var(--pu)">79 µm</div><div class="ds">limite inferior</div></div>
+        <div class="dc"><div class="dl">Paquimetria OD</div><div class="dv">527 µm</div><div class="ds2">Normal</div></div>
+        <div class="dc"><div class="dl">Paquimetria OE</div><div class="dv">533 µm</div><div class="ds2">Normal</div></div>
+        <div class="dc"><div class="dl">Campo Visual OD</div><div class="dv" style="color:var(--pk)">−3,5 dB</div><div class="ds2">p&lt;10% alterado</div></div>
+        <div class="dc"><div class="dl">Campo Visual OE</div><div class="dv" style="color:var(--pk)">−5,5 dB</div><div class="ds2">p&lt;5% alterado</div></div>
+        <div class="dc"><div class="dl">RNFL OD</div><div class="dv" style="color:var(--pu)">75 µm</div><div class="ds2">limite inferior</div></div>
+        <div class="dc"><div class="dl">RNFL OE</div><div class="dv" style="color:var(--pu)">79 µm</div><div class="ds2">limite inferior</div></div>
       </div>
     </div>
     <div class="card" style="margin:0">
       <div class="ch"><div class="ct">07/04/2026 — OCT de Mácula</div><span class="tg to">Normal</span></div>
       <div class="dg">
-        <div class="dc"><div class="dl">Fóvea OD</div><div class="dv">244 µm</div><div class="ds">Normal</div></div>
-        <div class="dc"><div class="dl">Fóvea OE</div><div class="dv">245 µm</div><div class="ds">Normal</div></div>
-        <div class="dc"><div class="dl">GCC OD</div><div class="dv">66 µm</div><div class="ds">monitorar</div></div>
-        <div class="dc"><div class="dl">GCC OE</div><div class="dv">63 µm</div><div class="ds">monitorar</div></div>
+        <div class="dc"><div class="dl">Fóvea OD</div><div class="dv">244 µm</div><div class="ds2">Normal</div></div>
+        <div class="dc"><div class="dl">Fóvea OE</div><div class="dv">245 µm</div><div class="ds2">Normal</div></div>
+        <div class="dc"><div class="dl">GCC OD</div><div class="dv">66 µm</div><div class="ds2">monitorar</div></div>
+        <div class="dc"><div class="dl">GCC OE</div><div class="dv">63 µm</div><div class="ds2">monitorar</div></div>
       </div>
     </div>
   </div>
   <div class="card" style="margin-top:18px">
     <div class="ct" style="margin-bottom:14px">O que esses resultados significam</div>
     <div class="eb">
-      <div class="ei"><div class="ed" style="background:var(--pk)"></div><div><strong>Piora do campo visual 2022→2026:</strong> O campo visual mede a área que você enxerga sem mover os olhos. O MD ficou mais negativo nos dois olhos, indicando perda de visão periférica, mais intensa no olho esquerdo.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--pk)"></div><div><strong>Piora do campo visual 2022→2026:</strong> O MD ficou mais negativo nos dois olhos, indicando perda de visão periférica, mais intensa no olho esquerdo.</div></div>
       <div class="ei"><div class="ed" style="background:var(--pu)"></div><div><strong>RNFL nos limites inferiores (75 e 79 µm):</strong> A RNFL é a camada de fibras nervosas da retina — extensão direta do nervo óptico. Valores abaixo de 80 µm merecem acompanhamento por risco de progressão.</div></div>
       <div class="ei"><div class="ed" style="background:var(--gn)"></div><div><strong>Mácula normal em 2026:</strong> A mácula, responsável pela visão central e detalhada, está preservada. O GCC precisa de monitoramento periódico.</div></div>
       <div class="ei"><div class="ed" style="background:var(--bb)"></div><div><strong>Contexto neurológico:</strong> A piora do campo visual é consistente com o quadro de polineuropatia e deve ser acompanhada em conjunto pela neurologista e pelo oftalmologista.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- REUMATOLOGIA -->
+<div id="re" class="ds ds-re">
+  <p class="st">Investigação Reumatológica</p>
+  <p class="ss">Painel preparado para a consulta de 18/05/2026 · Exame de referência: 24/04/2026 (Atende Mais / Fleury)</p>
+
+  <!-- DESTAQUE: inflamação persistente -->
+  <div class="pcr" style="border-color:var(--pu);box-shadow:0 4px 24px rgba(192,132,252,.15);margin-bottom:18px">
+    <div class="pcrt" style="color:var(--pu)">🔍 Quadro Inflamatório Ativo — Sem Autoanticorpos Identificados</div>
+    <p class="pcrx">Múltiplos marcadores inflamatórios persistentemente alterados ao longo de anos, com PCR nunca normalizada em 4 medições. Ao mesmo tempo, o rastreio completo de autoanticorpos (abr/2026) foi <strong style="color:var(--tx)">totalmente negativo</strong> — o que descarta as doenças autoimunes mais comuns, mas não explica a inflamação crônica. O Complemento C4 (99 mg/dL) e a Aldolase (9,2 U/L) merecem avaliação especializada.</p>
+  </div>
+
+  <!-- GRÁFICO: marcadores inflamatórios -->
+  <div class="card">
+    <div class="ch">
+      <div><div class="ct">Evolução dos Marcadores Inflamatórios</div><div class="cs">PCR · VHS · Aldolase — valores ao longo do tempo</div></div>
+    </div>
+    <div class="mg" id="reumMarkerBtns"></div>
+    <div class="cw"><canvas id="reumChart"></canvas></div>
+    <div class="dr-row" id="reumDots"></div>
+  </div>
+
+  <!-- COMPLEMENTO: destaque numérico -->
+  <div class="card">
+    <div class="ch"><div><div class="ct">Complemento Sérico — abr/2026</div><div class="cs">Elevação expressiva de C3 e C4</div></div><span class="tg ta">Alterado</span></div>
+    <div class="dg" style="grid-template-columns:repeat(3,1fr)">
+      <div class="dc">
+        <div class="dl">Complemento C3</div>
+        <div class="dv" style="color:var(--pk)">144</div>
+        <div class="ds2">mg/dL · ref: 75–135</div>
+      </div>
+      <div class="dc">
+        <div class="dl">Complemento C4</div>
+        <div class="dv" style="color:var(--pk)">99</div>
+        <div class="ds2">mg/dL · ref: 12–36</div>
+      </div>
+      <div class="dc">
+        <div class="dl">CH-50 (Total)</div>
+        <div class="dv" style="color:var(--gn)">89,1</div>
+        <div class="ds2">U/mL · ref: 42–95</div>
+      </div>
+    </div>
+    <div class="warn-box" style="margin-top:16px">⚠️ C4 quase 3× o limite superior. Complemento elevado (e não consumido) em contexto inflamatório ativo sugere resposta de fase aguda — padrão diferente do observado em lúpus ou vasculites, onde o complemento tende a ser consumido.</div>
+  </div>
+
+  <!-- AUTOANTICORPOS: tabela completa -->
+  <div class="card">
+    <div class="ch"><div><div class="ct">Rastreio de Autoanticorpos — abr/2026</div><div class="cs">Painel completo · Todos negativos</div></div><span class="tg to">Negativo</span></div>
+    <div style="overflow-x:auto">
+      <table class="tb">
+        <thead>
+          <tr><th>Exame</th><th>Resultado</th><th>Referência</th><th>Relevância</th></tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="4" style="background:var(--s3);color:var(--mu);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;padding:8px 14px">Anticorpos Antinucleares</td></tr>
+          <tr>
+            <td>FAN (IFI HEp-2)</td>
+            <td><span class="tg to">Não Reagente (AC-0)</span></td>
+            <td style="color:var(--mu);font-size:12px">Não Reagente</td>
+            <td style="color:var(--mu);font-size:13px">Triagem para LES, esclerodermia, Sjögren, miosite</td>
+          </tr>
+          <tr><td colspan="4" style="background:var(--s3);color:var(--mu);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;padding:8px 14px">Vasculites (ANCA)</td></tr>
+          <tr>
+            <td>P-ANCA</td>
+            <td><span class="tg to">Não Reagente</span></td>
+            <td style="color:var(--mu);font-size:12px">Não Reagente</td>
+            <td style="color:var(--mu);font-size:13px">Vasculite por MPO (granulomatose, poliangiite)</td>
+          </tr>
+          <tr>
+            <td>C-ANCA</td>
+            <td><span class="tg to">Não Reagente</span></td>
+            <td style="color:var(--mu);font-size:12px">Não Reagente</td>
+            <td style="color:var(--mu);font-size:13px">Granulomatose com poliangiite (Wegener)</td>
+          </tr>
+          <tr><td colspan="4" style="background:var(--s3);color:var(--mu);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;padding:8px 14px">Síndrome de Sjögren / LES / Espondilite</td></tr>
+          <tr>
+            <td>Anti-SSA/Ro</td>
+            <td><span class="tg to">&lt; 7,0 U/mL</span></td>
+            <td style="color:var(--mu);font-size:12px">&lt; 7,0</td>
+            <td style="color:var(--mu);font-size:13px">Sjögren, LES, neonatal</td>
+          </tr>
+          <tr>
+            <td>Anti-SSB/La</td>
+            <td><span class="tg to">&lt; 7,0 U/mL</span></td>
+            <td style="color:var(--mu);font-size:12px">&lt; 7,0</td>
+            <td style="color:var(--mu);font-size:13px">Sjögren, LES</td>
+          </tr>
+          <tr>
+            <td>Anti-Sm</td>
+            <td><span class="tg to">&lt; 7,0 U/mL</span></td>
+            <td style="color:var(--mu);font-size:12px">&lt; 7,0</td>
+            <td style="color:var(--mu);font-size:13px">Alta especificidade para LES</td>
+          </tr>
+          <tr>
+            <td>Anti-RNP</td>
+            <td><span class="tg to">&lt; 5,0 U/mL</span></td>
+            <td style="color:var(--mu);font-size:12px">&lt; 5,0</td>
+            <td style="color:var(--mu);font-size:13px">Doença mista do tecido conjuntivo</td>
+          </tr>
+          <tr>
+            <td>Anti-SCL70</td>
+            <td><span class="tg to">&lt; 7,0 U/mL</span></td>
+            <td style="color:var(--mu);font-size:12px">&lt; 7,0</td>
+            <td style="color:var(--mu);font-size:13px">Esclerodermia difusa</td>
+          </tr>
+          <tr>
+            <td>Anti-Jo-1</td>
+            <td><span class="tg to">&lt; 7,0 U/mL</span></td>
+            <td style="color:var(--mu);font-size:12px">&lt; 7,0</td>
+            <td style="color:var(--mu);font-size:13px">Síndrome anti-sintetase, miosite</td>
+          </tr>
+          <tr>
+            <td>Fator Reumatoide</td>
+            <td><span class="tg to">&lt; 10 UI/mL</span></td>
+            <td style="color:var(--mu);font-size:12px">&lt; 14,0</td>
+            <td style="color:var(--mu);font-size:13px">Artrite reumatoide, outras inflamatórias</td>
+          </tr>
+          <tr>
+            <td>HLA-B27</td>
+            <td><span class="tg to">Ausente</span></td>
+            <td style="color:var(--mu);font-size:12px">Ausente</td>
+            <td style="color:var(--mu);font-size:13px">Espondiloartrite, espondilite anquilosante</td>
+          </tr>
+          <tr><td colspan="4" style="background:var(--s3);color:var(--mu);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;padding:8px 14px">Painel Anti-Sintetase (Miosite) — Imunoblot · SYNLAB</td></tr>
+          <tr>
+            <td style="color:var(--mu);font-size:13px">Anti-MI2, Anti-KU, Anti-PM100, Anti-PM75, Anti-Jo1, Anti-SRP, Anti-PL7, Anti-PL12, Anti-EJ, Anti-OJ, Anti-Ro52</td>
+            <td><span class="tg to">Todos não detectáveis</span></td>
+            <td style="color:var(--mu);font-size:12px">Não detectável</td>
+            <td style="color:var(--mu);font-size:13px">Miosite autoimune, polimiosite, dermatomiosite</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--mu);margin-top:12px;line-height:1.6">FAN realizado por IFI em células HEp-2, diluição de triagem 1:80. Anti-sintetase por imunoblot (SYNLAB). ANCA por imunofluorescência indireta.</p>
+  </div>
+
+  <!-- ALDOLASE + CPK: enzimas musculares -->
+  <div class="card">
+    <div class="ch"><div><div class="ct">Enzimas Musculares</div><div class="cs">Aldolase persistentemente elevada · CPK normal</div></div></div>
+    <div class="dg" style="grid-template-columns:repeat(2,1fr);margin-bottom:16px">
+      <div class="dc">
+        <div class="dl">Aldolase — abr/2026</div>
+        <div class="dv" style="color:var(--pk)">9,2 U/L</div>
+        <div class="ds2">ref adultos: até 7,6</div>
+      </div>
+      <div class="dc">
+        <div class="dl">CPK — abr/2026</div>
+        <div class="dv" style="color:var(--gn)">65 U/L</div>
+        <div class="ds2">ref feminino &gt;18a: 26–140</div>
+      </div>
+    </div>
+    <div class="eb">
+      <div class="ei"><div class="ed" style="background:var(--pk)"></div><div><strong>Aldolase alta com CPK normal:</strong> A aldolase é mais sensível que a CPK para dano muscular inflamatório leve ou miopatia de fase inicial. Aldolase elevada com CPK normal pode ocorrer em miosite precoce, doenças inflamatórias sistêmicas e lesão hepática — vale contextualizar clinicamente.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--pu)"></div><div><strong>Padrão persistente:</strong> Em jan/2023 a aldolase era 9,4 U/L; em abr/2026 está em 9,2 U/L — praticamente idêntica após 3 anos. A estabilidade do valor sugere condição crônica mantida, não evento agudo.</div></div>
+    </div>
+  </div>
+
+  <!-- FERRO: recuperação expressiva -->
+  <div class="card">
+    <div class="ch"><div><div class="ct">Metabolismo do Ferro</div><div class="cs">Recuperação expressiva do ferro sérico entre set/2025 e abr/2026</div></div></div>
+    <div class="dg" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr));margin-bottom:16px">
+      <div class="dc">
+        <div class="dl">Ferro Sérico set/25</div>
+        <div class="dv" style="color:var(--pk)">30 µg/dL</div>
+        <div class="ds2">ref: 50–170 · baixo</div>
+      </div>
+      <div class="dc">
+        <div class="dl">Ferro Sérico abr/26</div>
+        <div class="dv" style="color:var(--gn)">138 µg/dL</div>
+        <div class="ds2">ref: 50–170 · normal</div>
+      </div>
+      <div class="dc">
+        <div class="dl">Ferritina abr/26</div>
+        <div class="dv" style="color:var(--gn)">34,5 ng/mL</div>
+        <div class="ds2">ref: 10–271 · normal</div>
+      </div>
+    </div>
+    <div class="ei"><div class="ed" style="background:var(--gn)"></div><div><strong>Ferro sérico normalizado:</strong> Estava criticamente baixo em set/2025 (30 µg/dL) e subiu para 138 em abr/2026. Ferritina dentro do limite inferior da normalidade — o depósito está recomposto, mas ainda discreto. Vale monitorar.</div></div>
+  </div>
+
+  <!-- CONTEXTO CLÍNICO -->
+  <div class="card">
+    <div class="ct" style="margin-bottom:14px">Contexto Clínico para a Consulta</div>
+    <div class="eb">
+      <div class="ei"><div class="ed" style="background:var(--pu)"></div><div><strong>Inflamação crônica sem etiologia autoimune definida:</strong> PCR nunca normalizada (4 medições desde 2023), C3 e C4 elevados, Aldolase cronicamente alta — porém todo o painel de autoanticorpos negativo. A origem da inflamação ainda não está explicada.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--pk)"></div><div><strong>Diagnóstico neurológico estabelecido (SARAH, out/2024):</strong> Polineuropatia e Degeneração Combinada da Medula por deficiência de B12 (CID G32.0 + G63.44). A inflamação crônica pode ser consequência, causa associada ou coincidente — merece investigação reumatológica independente.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--bb)"></div><div><strong>Bexiga neurogênica com urina limpa:</strong> Quatro exames de urina (dez/2024 a set/2025) sem alterações significativas, o que afasta infecção urinária como fonte de inflamação sistêmica.</div></div>
+      <div class="ei"><div class="ed" style="background:var(--gn)"></div><div><strong>Vitamina D estabilizada:</strong> Após anos de deficiência severa (4,3 ng/mL em jul/2022), chegou a 45,8 ng/mL em abr/2026 — dentro da faixa adequada para grupos de risco (30–60 ng/mL). Suplementação em manutenção.</div></div>
     </div>
   </div>
 </div>
@@ -367,9 +692,7 @@ footer{text-align:center;padding:32px 20px;color:var(--mu);font-size:13px;
 </div>
 
 <script>
-function sendHeight(){
-  window.parent.postMessage({iframeHeight:document.body.scrollHeight},'*');
-}
+function sendHeight(){window.parent.postMessage({iframeHeight:document.body.scrollHeight},'*');}
 window.addEventListener('load',sendHeight);
 window.addEventListener('resize',sendHeight);
 setInterval(sendHeight,600);
@@ -378,13 +701,10 @@ setInterval(sendHeight,600);
 document.addEventListener('DOMContentLoaded',function(){
 (function(){
 'use strict';
-
-if(!document.getElementById('home')){return;}
 if(typeof Chart==='undefined'){
   document.querySelector('.dr').innerHTML='<p style="padding:40px;color:#e066a8">Carregando gráficos... Aguarde e recarregue a página.</p>';
   return;
 }
-
 Chart.defaults.color='#8892b0';
 Chart.defaults.borderColor='#2d3654';
 Chart.defaults.font.family="'Inter',sans-serif";
@@ -392,11 +712,11 @@ Chart.defaults.font.size=13;
 
 const D={
   "Vitamina D":{u:"ng/mL",r:"Ideal: <b>30–60</b>",lr:20,lw:30,h:null,
-    v:[{d:"jul/22",v:4.3},{d:"mai/24",v:9.9},{d:"jun/24",v:13.1},{d:"ago/24",v:23.6},{d:"mar/25",v:32.7},{d:"set/25",v:48.1}]},
+    v:[{d:"jul/22",v:4.3},{d:"mai/24",v:9.9},{d:"jun/24",v:13.1},{d:"ago/24",v:23.6},{d:"mar/25",v:32.7},{d:"set/25",v:48.1},{d:"abr/26",v:45.8}]},
   "Vitamina B12":{u:"pg/mL",r:"Ref: 187–883 · Ideal: <b>&gt;300</b>",lr:187,lw:300,h:883,
-    v:[{d:"jan/23",v:210},{d:"mai/24",v:157},{d:"jun/24",v:175},{d:"ago/24",v:303},{d:"set/24",v:350},{d:"mar/25",v:520},{d:"set/25",v:776}]},
+    v:[{d:"jan/23",v:210},{d:"mai/24",v:157},{d:"jun/24",v:175},{d:"ago/24",v:303},{d:"set/24",v:350},{d:"mar/25",v:520},{d:"set/25",v:776},{d:"nov/25",v:630},{d:"abr/26",v:630}]},
   "PCR":{u:"mg/dL",r:"Ref: <b>&lt;0,5</b>",h:0.5,hw:1.0,
-    v:[{d:"mar/23",v:3.7},{d:"abr/25",v:2.0},{d:"nov/25",v:2.88}]},
+    v:[{d:"mar/23",v:3.7},{d:"abr/25",v:2.0},{d:"nov/25",v:2.88},{d:"abr/26",v:1.12}]},
   "Colesterol Total":{u:"mg/dL",r:"Ideal: <b>&lt;200</b> · Alto: &gt;240",h:200,hw:240,
     v:[{d:"dez/21",v:276},{d:"jul/22",v:265},{d:"jun/24",v:247},{d:"jan/25",v:284},{d:"mar/25",v:237},{d:"set/25",v:171}]},
   "LDL":{u:"mg/dL",r:"Ideal: <b>&lt;130</b> · Alto: &gt;160",h:130,hw:160,
@@ -404,21 +724,27 @@ const D={
   "Potássio":{u:"mEq/L",r:"Ref: <b>3,5–5,5</b>",lr:3.5,h:5.5,
     v:[{d:"jan/23",v:4.1},{d:"mar/23",v:3.0},{d:"jun/24",v:3.0},{d:"mar/25",v:3.2},{d:"mar/25b",v:3.3},{d:"abr/25",v:4.0},{d:"nov/25",v:4.8}]},
   "Hemoglobina":{u:"g/dL",r:"Ref: <b>11,5–16,5</b>",lr:11.5,h:16.5,
-    v:[{d:"dez/21",v:14.0},{d:"jan/23",v:13.9},{d:"mai/24",v:16.6},{d:"jan/25",v:15.0},{d:"set/25",v:13.8}]},
+    v:[{d:"dez/21",v:14.0},{d:"jan/23",v:13.9},{d:"mai/24",v:16.6},{d:"jan/25",v:15.0},{d:"set/25",v:13.8},{d:"abr/26",v:15.3}]},
   "Albumina":{u:"g/dL",r:"Ref: <b>3,4–5,0</b>",lr:3.4,h:5.0,
     v:[{d:"jan/23",v:4.5},{d:"mai/24",v:4.6},{d:"set/25",v:2.8}]},
+  "Aldolase":{u:"U/L",r:"Ref: <b>até 7,6</b>",h:7.6,
+    v:[{d:"jan/23",v:9.4},{d:"abr/26",v:9.2}]},
   "Linfócitos":{u:"%",r:"Ref: <b>20–35</b>",lr:20,h:35,
-    v:[{d:"dez/21",v:38},{d:"jul/22",v:43.8},{d:"jan/23",v:48.3},{d:"mai/24",v:37.4},{d:"ago/24",v:36.6},{d:"jan/25",v:39},{d:"set/25a",v:16},{d:"set/25b",v:28.1}]},
+    v:[{d:"dez/21",v:38},{d:"jul/22",v:43.8},{d:"jan/23",v:48.3},{d:"mai/24",v:37.4},{d:"ago/24",v:36.6},{d:"jan/25",v:39},{d:"set/25a",v:16},{d:"set/25b",v:28.1},{d:"abr/26",v:41.3}]},
   "Monócitos":{u:"%",r:"Ref: <b>4–8</b>",lr:4,h:8,
-    v:[{d:"jun/24",v:8.5},{d:"ago/24",v:8.5},{d:"jan/25",v:9.4},{d:"mar/25",v:8.6},{d:"set/25",v:13.6}]},
+    v:[{d:"jun/24",v:8.5},{d:"ago/24",v:8.5},{d:"jan/25",v:9.4},{d:"mar/25",v:8.6},{d:"set/25",v:13.6},{d:"abr/26",v:8.8}]},
   "Ácido Fólico":{u:"ng/mL",r:"Normal: <b>6–20</b>",lr:3,lw:6,h:20,
     v:[{d:"jan/23",v:4},{d:"mai/24",v:1.9},{d:"ago/24",v:67.5},{d:"mar/25",v:14}]},
-  "Ferritina":{u:"µg/L",r:"Ref: <b>4,5–170</b>",lr:4.5,h:170,
-    v:[{d:"mai/24",v:62},{d:"mar/25",v:89},{d:"set/25",v:58.8}]},
+  "Ferritina":{u:"µg/L",r:"Ref: <b>10–271 (F adulta)</b>",lr:10,h:271,
+    v:[{d:"mai/24",v:62},{d:"abr/25",v:14.3},{d:"set/25",v:58.8},{d:"abr/26",v:34.5}]},
+  "Ferro Sérico":{u:"µg/dL",r:"Ref: <b>50–170</b>",lr:50,h:170,
+    v:[{d:"abr/25",v:56},{d:"set/25",v:30},{d:"abr/26",v:138}]},
   "HDL":{u:"mg/dL",r:"Ideal: <b>&gt;40</b>",lr:40,
     v:[{d:"dez/21",v:39.5},{d:"jun/24",v:49},{d:"set/25",v:46}]},
   "Triglicerídeos":{u:"mg/dL",r:"Ideal: <b>&lt;170</b>",h:170,
     v:[{d:"dez/21",v:113},{d:"jul/22",v:111},{d:"jun/24",v:134},{d:"set/25",v:78}]},
+  "VHS":{u:"mm/1ª h",r:"Ref: <b>2–36 (F 18–65a)</b>",lr:2,h:36,
+    v:[{d:"ago/24",v:13},{d:"abr/25",v:33},{d:"abr/26",v:19}]},
 };
 
 function st(v,d){
@@ -428,12 +754,8 @@ function st(v,d){
   if(d.h!=null&&v>d.h)return'w';
   return'o';
 }
-function pc(v,d){
-  const s=st(v,d);
-  return s==='a'?'#e066a8':s==='w'?'#c084fc':'#4ade80';
-}
+function pc(v,d){const s=st(v,d);return s==='a'?'#e066a8':s==='w'?'#c084fc':'#4ade80';}
 
-// ALERTAS
 function bAlerts(){
   const ag=document.getElementById('alertGrid');
   const ig=document.getElementById('improvedGrid');
@@ -456,7 +778,6 @@ function bAlerts(){
   });
 }
 
-// SANGUE
 let MC=null;
 function bMarkers(){
   const g=document.getElementById('markerGrid');
@@ -469,8 +790,7 @@ function bMarkers(){
     b.textContent=n;
     b.onclick=()=>{
       document.querySelectorAll('.mb').forEach(x=>x.classList.remove('on'));
-      b.classList.add('on');
-      dChart(n);
+      b.classList.add('on');dChart(n);
     };
     g.appendChild(b);
   });
@@ -479,11 +799,9 @@ function bMarkers(){
 
 function dChart(n){
   const d=D[n];
-  const t=document.getElementById('cT');
-  const s=document.getElementById('cS');
-  const r=document.getElementById('cR');
-  if(!t)return;
-  t.textContent=n; s.textContent=d.u; r.innerHTML=d.r;
+  document.getElementById('cT').textContent=n;
+  document.getElementById('cS').textContent=d.u;
+  document.getElementById('cR').innerHTML=d.r;
   const ctx=document.getElementById('mainChart').getContext('2d');
   if(MC)MC.destroy();
   MC=new Chart(ctx,{
@@ -493,8 +811,7 @@ function dChart(n){
       backgroundColor:'rgba(79,142,247,0.07)',
       pointBackgroundColor:d.v.map(p=>pc(p.v,d)),
       pointBorderColor:d.v.map(p=>pc(p.v,d)),
-      pointRadius:7,pointHoverRadius:10,
-      tension:0.3,fill:true,borderWidth:2.5
+      pointRadius:7,pointHoverRadius:10,tension:0.3,fill:true,borderWidth:2.5
     }]},
     options:{
       responsive:true,maintainAspectRatio:false,
@@ -503,91 +820,102 @@ function dChart(n){
         titleColor:'#e8edf8',bodyColor:'#8892b0',padding:12,cornerRadius:8,
         callbacks:{label:c=>` ${c.parsed.y} ${d.u}`}
       }},
-      scales:{
-        x:{grid:{color:'#1d2435'},ticks:{font:{size:12}}},
-        y:{grid:{color:'#1d2435'},ticks:{font:{size:12}}}
-      }
+      scales:{x:{grid:{color:'#1d2435'},ticks:{font:{size:12}}},y:{grid:{color:'#1d2435'},ticks:{font:{size:12}}}}
     }
   });
-  const row=document.getElementById('dotsRow');
-  row.innerHTML='';
-  d.v.forEach(p=>{
-    const col=pc(p.v,d);
-    row.innerHTML+=`<span class="di"><span class="dot" style="background:${col}"></span>${p.d}: ${p.v}</span>`;
-  });
+  const row=document.getElementById('dotsRow');row.innerHTML='';
+  d.v.forEach(p=>{const col=pc(p.v,d);row.innerHTML+=`<span class="di"><span class="dot" style="background:${col}"></span>${p.d}: ${p.v}</span>`;});
 }
 
-// DENSIT
 function bDensit(){
-  const el=document.getElementById('densitChart');
-  if(!el)return;
-  new Chart(el.getContext('2d'),{
-    type:'bar',
+  const el=document.getElementById('densitChart');if(!el)return;
+  new Chart(el.getContext('2d'),{type:'bar',
     data:{labels:['Coluna L1–L4','TBS'],datasets:[
       {label:'jan/2022',data:[0.5,null],backgroundColor:'rgba(74,222,128,0.6)',borderRadius:7},
       {label:'mar/2025',data:[-0.9,-0.9],backgroundColor:'rgba(192,132,252,0.6)',borderRadius:7}
     ]},
-    options:{
-      responsive:true,maintainAspectRatio:false,
+    options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:true,labels:{color:'#8892b0',font:{size:13},padding:16}},
-        tooltip:{backgroundColor:'#1d2435',borderColor:'#2d3654',borderWidth:1,
-          titleColor:'#e8edf8',bodyColor:'#8892b0',padding:12}},
-      scales:{
-        x:{grid:{color:'#1d2435'},ticks:{color:'#8892b0',font:{size:13}}},
-        y:{grid:{color:'#1d2435'},ticks:{color:'#8892b0',font:{size:13}},
-          min:-2.5,max:2,title:{display:true,text:'T-score',color:'#8892b0',font:{size:12}}}
-      }
-    }
+        tooltip:{backgroundColor:'#1d2435',borderColor:'#2d3654',borderWidth:1,titleColor:'#e8edf8',bodyColor:'#8892b0',padding:12}},
+      scales:{x:{grid:{color:'#1d2435'},ticks:{color:'#8892b0',font:{size:13}}},
+        y:{grid:{color:'#1d2435'},ticks:{color:'#8892b0',font:{size:13}},min:-2.5,max:2,
+          title:{display:true,text:'T-score',color:'#8892b0',font:{size:12}}}}}
   });
 }
 
-// CV
 function bCV(){
-  const el=document.getElementById('cvChart');
-  if(!el)return;
-  new Chart(el.getContext('2d'),{
-    type:'line',
+  const el=document.getElementById('cvChart');if(!el)return;
+  new Chart(el.getContext('2d'),{type:'line',
     data:{labels:['out/2022','jan/2026'],datasets:[
-      {label:'OD (olho direito)',data:[-0.15,-3.5],borderColor:'#4f8ef7',
-        backgroundColor:'rgba(79,142,247,0.07)',
-        pointBackgroundColor:['#4ade80','#e066a8'],pointRadius:8,
-        tension:0.3,fill:true,borderWidth:2.5},
-      {label:'OE (olho esquerdo)',data:[-0.62,-5.5],borderColor:'#c084fc',
-        backgroundColor:'rgba(192,132,252,0.07)',
-        pointBackgroundColor:['#4ade80','#e066a8'],pointRadius:8,
-        tension:0.3,fill:true,borderWidth:2.5}
+      {label:'OD (olho direito)',data:[-0.15,-3.5],borderColor:'#4f8ef7',backgroundColor:'rgba(79,142,247,0.07)',
+        pointBackgroundColor:['#4ade80','#e066a8'],pointRadius:8,tension:0.3,fill:true,borderWidth:2.5},
+      {label:'OE (olho esquerdo)',data:[-0.62,-5.5],borderColor:'#c084fc',backgroundColor:'rgba(192,132,252,0.07)',
+        pointBackgroundColor:['#4ade80','#e066a8'],pointRadius:8,tension:0.3,fill:true,borderWidth:2.5}
     ]},
-    options:{
-      responsive:true,maintainAspectRatio:false,
+    options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:true,labels:{color:'#8892b0',font:{size:13},padding:16}},
-        tooltip:{backgroundColor:'#1d2435',borderColor:'#2d3654',borderWidth:1,
-          titleColor:'#e8edf8',bodyColor:'#8892b0',padding:12,
+        tooltip:{backgroundColor:'#1d2435',borderColor:'#2d3654',borderWidth:1,titleColor:'#e8edf8',bodyColor:'#8892b0',padding:12,
           callbacks:{label:c=>` ${c.dataset.label}: MD ${c.parsed.y} dB`}}},
-      scales:{
-        x:{grid:{color:'#1d2435'},ticks:{color:'#8892b0',font:{size:13}}},
-        y:{grid:{color:'#1d2435'},ticks:{color:'#8892b0',font:{size:13}},
-          title:{display:true,text:'MD (dB)',color:'#8892b0',font:{size:12}}}
-      }
-    }
+      scales:{x:{grid:{color:'#1d2435'},ticks:{color:'#8892b0',font:{size:13}}},
+        y:{grid:{color:'#1d2435'},ticks:{color:'#8892b0',font:{size:13}},title:{display:true,text:'MD (dB)',color:'#8892b0',font:{size:12}}}}}
   });
 }
 
-// Use event listeners instead of onclick (works with WordPress CSP)
-document.querySelectorAll('.dt').forEach(function(btn){
-  btn.addEventListener('click',function(){
-    var id=this.getAttribute('data-tab');
-    document.querySelectorAll('.ds').forEach(function(s){s.classList.remove('on');});
-    document.querySelectorAll('.dt').forEach(function(t){t.classList.remove('on');});
-    document.getElementById(id).classList.add('on');
-    btn.classList.add('on');
-    window.scrollTo({top:0,behavior:'smooth'});
+const RD={
+  "PCR":{u:"mg/dL",r:"ref: <0,5",h:0.5,c:'#e066a8',
+    v:[{d:"mar/23",v:3.7},{d:"abr/25",v:2.0},{d:"nov/25",v:2.88},{d:"abr/26",v:1.12}]},
+  "VHS":{u:"mm/1ªh",r:"ref: 2–36",lr:2,h:36,c:'#c084fc',
+    v:[{d:"ago/24",v:13},{d:"abr/25",v:33},{d:"abr/26",v:19}]},
+  "Aldolase":{u:"U/L",r:"ref: até 7,6",h:7.6,c:'#fb923c',
+    v:[{d:"jan/23",v:9.4},{d:"abr/26",v:9.2}]},
+  "C3":{u:"mg/dL",r:"ref: 75–135",lr:75,h:135,c:'#facc15',
+    v:[{d:"abr/26",v:144}]},
+  "C4":{u:"mg/dL",r:"ref: 12–36",lr:12,h:36,c:'#f87171',
+    v:[{d:"abr/26",v:99}]},
+};
+let RC=null;
+function bReumMarkers(){
+  const g=document.getElementById('reumMarkerBtns');if(!g)return;
+  Object.keys(RD).forEach((n,i)=>{
+    const b=document.createElement('button');
+    const al=RD[n].v.some(p=>{const d=RD[n];return(d.h&&p.v>d.h)||(d.lr&&p.v<d.lr);});
+    b.className=`mb${al?' ma':''}${i===0?' on':''}`;
+    b.textContent=n;
+    b.onclick=()=>{document.querySelectorAll('#reumMarkerBtns .mb').forEach(x=>x.classList.remove('on'));b.classList.add('on');dReumChart(n);};
+    g.appendChild(b);
   });
-});
+  dReumChart(Object.keys(RD)[0]);
+}
+function dReumChart(n){
+  const d=RD[n];
+  const ctx=document.getElementById('reumChart');if(!ctx)return;
+  if(RC)RC.destroy();
+  RC=new Chart(ctx.getContext('2d'),{
+    type:'line',
+    data:{labels:d.v.map(p=>p.d),datasets:[{
+      data:d.v.map(p=>p.v),borderColor:d.c,
+      backgroundColor:d.c+'22',
+      pointBackgroundColor:d.v.map(p=>(d.h&&p.v>d.h)||(d.lr&&p.v<d.lr)?'#e066a8':'#4ade80'),
+      pointBorderColor:d.v.map(p=>(d.h&&p.v>d.h)||(d.lr&&p.v<d.lr)?'#e066a8':'#4ade80'),
+      pointRadius:8,pointHoverRadius:11,tension:0.3,fill:true,borderWidth:2.5
+    }]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{
+        backgroundColor:'#1d2435',borderColor:'#2d3654',borderWidth:1,
+        titleColor:'#e8edf8',bodyColor:'#8892b0',padding:12,cornerRadius:8,
+        callbacks:{label:c=>` ${c.parsed.y} ${d.u}`}
+      }},
+      scales:{x:{grid:{color:'#1d2435'},ticks:{font:{size:12}}},y:{grid:{color:'#1d2435'},ticks:{font:{size:12}}}}
+    }
+  });
+  const row=document.getElementById('reumDots');row.innerHTML='';
+  d.v.forEach(p=>{
+    const al=(d.h&&p.v>d.h)||(d.lr&&p.v<d.lr);
+    row.innerHTML+=`<span class="di"><span class="dot" style="background:${al?'#e066a8':'#4ade80'}"></span>${p.d}: ${p.v} ${d.u}</span>`;
+  });
+}
 
-bAlerts();
-bMarkers();
-bDensit();
-bCV();
+bAlerts();bMarkers();bDensit();bCV();bReumMarkers();
 })();
 });
 </script>
